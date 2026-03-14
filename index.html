@@ -476,6 +476,89 @@
       color: #555;
     }
 
+    /* ── RESPONSIVE: TABLET (768px – 1199px) ── */
+    @media (max-width: 1199px) {
+      /* Categories: 4-column grid
+         Reset ALL tile column rules from desktop (row2 classes would cause overlaps)
+         Then tiles 1-4 each span 2 = 2 per row = 2 full rows.
+         Tile 5 (last) is centered: col 2–3 in a 4-col grid. */
+      .categories__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .cat-tile,
+      .cat-tile--row2-left,
+      .cat-tile--row2-right { grid-column: span 2; }
+      .cat-tile:last-child  { grid-column: 2 / span 2; }
+
+      /* Hero: 50/50 split at tablet (spec line 229) */
+      .hero__content    { flex: 0 0 50%; }
+      .hero__image-wrap { flex: 0 0 50%; }
+
+      /* Articles: 2 columns */
+      .articles__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── RESPONSIVE: MOBILE (< 768px) ── */
+    @media (max-width: 767px) {
+
+      /* Nav: logo + cart only */
+      .nav__links  { display: none; }
+      .nav__search { display: none; }
+
+      /* Hero: remove 90vh min-height so section sizes to content */
+      .hero { min-height: auto; }
+
+      /* Hero: stacked, image above text */
+      .hero__inner {
+        flex-direction: column-reverse;
+        min-height: auto;
+        padding: 40px 0;
+      }
+      .hero__content {
+        flex: none;
+        width: 100%;
+        padding: 32px 0 0;
+      }
+      .hero__headline { font-size: 32px; }
+      .hero__image-wrap {
+        flex: none;
+        width: 100%;
+        min-height: auto;
+      }
+      .hero__img-placeholder { aspect-ratio: 16 / 9; }
+
+      /* Categories: 2 columns, natural flow */
+      .categories__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cat-tile,
+      .cat-tile--row2-left,
+      .cat-tile--row2-right,
+      .cat-tile:last-child {
+        grid-column: span 1;
+      }
+
+      /* Products: 2 columns (already 2-col, stays) */
+
+      /* Articles: 1 column */
+      .articles__grid { grid-template-columns: 1fr; }
+
+      /* Testimonials: 1 column */
+      .testimonials__grid { flex-direction: column; }
+
+      /* Newsletter form: stacked */
+      .newsletter__form { flex-direction: column; }
+      .newsletter__form .btn { width: 100%; }
+
+      /* Footer: stacked */
+      .footer__top {
+        flex-direction: column;
+        gap: 32px;
+        padding: 40px 0 24px;
+      }
+      .footer__links { gap: 32px; }
+    }
+
   </style>
 </head>
 <body>
