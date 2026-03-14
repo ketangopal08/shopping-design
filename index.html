@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formé — Designed for daily life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    /* ── TOKENS ── */
+    :root {
+      --color-accent:      #2D2D2D;
+      --color-bg:          #FFFFFF;
+      --color-bg-alt:      #FAFAFA;
+      --color-bg-soft:     #F5F5F5;
+      --color-text:        #1A1A1A;
+      --color-muted:       #888888;
+      --color-soft:        #444444;
+      --color-border:      #EEEEEE;
+      --color-placeholder: #E0E0E0;
+      --color-footer-bg:   #1A1A1A;
+
+      --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+      --container-max: 1200px;
+      --container-pad: 24px;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-base);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── FOCUS ── */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    /* ── LAYOUT CONTAINER ── */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+    }
+
+    /* ── SHARED SECTION HEADING ── */
+    .section-heading { font-size: 28px; font-weight: 700; }
+    .section-subtext  { font-size: 13px; color: var(--color-muted); margin-top: 6px; }
+
+  </style>
+</head>
+<body>
+
+  <!-- sections will go here -->
+
+  <script>
+    // JS will go here
+  </script>
+</body>
+</html>
