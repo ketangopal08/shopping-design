@@ -60,6 +60,73 @@
     .section-heading { font-size: 28px; font-weight: 700; }
     .section-subtext  { font-size: 13px; color: var(--color-muted); margin-top: 6px; }
 
+    /* ── SHARED BUTTON ── */
+    .btn {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 12px 28px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn--primary {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    /* ── SHARED TAG ── */
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--color-bg-alt);
+      min-height: 90vh;
+    }
+    .hero__inner {
+      display: flex;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .hero__content {
+      flex: 0 0 55%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 60px 0;
+    }
+    .hero__headline {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-text);
+    }
+    .hero__image-wrap {
+      flex: 0 0 45%;
+      display: flex;
+      align-items: stretch;
+      min-height: 90vh;
+    }
+    .hero__img-placeholder {
+      width: 100%;
+      background: var(--color-placeholder);
+      aspect-ratio: 4 / 5;
+      align-self: center;
+    }
+    /* NOTE: When replacing the placeholder div with a real <img>, add:
+       object-fit: cover; width: 100%; height: 100%;
+       to the <img> tag — spec requires object-fit: cover. */
+
     /* ── NAVIGATION ── */
     .nav {
       position: sticky;
@@ -138,6 +205,20 @@
       </div>
     </div>
   </header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <span class="tag">New Collection</span>
+      <h1 class="hero__headline">Designed<br>for daily life.</h1>
+      <a href="#" class="btn btn--primary">Shop Now</a>
+    </div>
+    <div class="hero__image-wrap">
+      <div class="hero__img-placeholder" role="img" aria-label="Hero product — 3D printed desk object"></div>
+    </div>
+  </div>
+</section>
 
   <!-- sections will go here -->
 
