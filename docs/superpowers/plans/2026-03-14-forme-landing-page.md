@@ -1,0 +1,1234 @@
+# Formé Landing Page Implementation Plan
+
+> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Build a single-file, static HTML/CSS/JS landing page for Formé, a minimalist 3D-printed daily-use objects shop.
+
+**Architecture:** Everything lives in one `index.html` file with an embedded `<style>` block and a small inline `<script>` at the bottom. No build step, no framework, no external dependencies beyond Google Fonts. CSS custom properties drive the design token system. Sections are built top-to-bottom in document order.
+
+**Tech Stack:** HTML5, CSS3 (Grid, Flexbox, custom properties), vanilla JavaScript (< 20 lines), Google Fonts (Inter)
+
+**Spec:** `docs/superpowers/specs/2026-03-14-forme-landing-page-design.md`
+
+---
+
+## Chunk 1: Foundation, CSS Tokens & Navigation
+
+### Task 1: Create `index.html` with scaffold and CSS tokens
+
+**Files:**
+- Create: `index.html`
+
+- [ ] **Step 1: Create the file with the required `<head>` block and CSS reset**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formé — Designed for daily life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    /* ── TOKENS ── */
+    :root {
+      --color-accent:      #2D2D2D;
+      --color-bg:          #FFFFFF;
+      --color-bg-alt:      #FAFAFA;
+      --color-bg-soft:     #F5F5F5;
+      --color-text:        #1A1A1A;
+      --color-muted:       #888888;
+      --color-soft:        #444444;
+      --color-border:      #EEEEEE;
+      --color-placeholder: #E0E0E0;
+      --color-footer-bg:   #1A1A1A;
+
+      --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+      --container-max: 1200px;
+      --container-pad: 24px;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-base);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── FOCUS ── */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    /* ── LAYOUT CONTAINER ── */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+    }
+
+    /* ── SHARED SECTION HEADING ── */
+    .section-heading { font-size: 28px; font-weight: 700; }
+    .section-subtext  { font-size: 13px; color: var(--color-muted); margin-top: 6px; }
+
+  </style>
+</head>
+<body>
+
+  <!-- sections will go here -->
+
+  <script>
+    // JS will go here
+  </script>
+</body>
+</html>
+```
+
+- [ ] **Step 2: Open in browser and verify**
+
+Open `index.html` directly in a browser (File → Open or drag-and-drop).
+Expected: blank white page, no console errors, Inter font loading in DevTools Network tab.
+
+- [ ] **Step 3: Commit**
+
+```bash
+cd "/Users/ketangopalspectro/ClaudeCode Projects/E-commerce"
+git add index.html
+git commit -m "feat: scaffold index.html with CSS tokens and reset"
+```
+
+---
+
+### Task 2: Navigation bar
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add the nav HTML inside `<body>` (replace the `<!-- sections will go here -->` comment)**
+
+```html
+<!-- ── NAVIGATION ── -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="#" class="nav__logo">FORMÉ</a>
+    <nav class="nav__links" aria-label="Main navigation">
+      <a href="#">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+    </nav>
+    <div class="nav__icons">
+      <button class="nav__icon-btn nav__search" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="nav__icon-btn nav__cart" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+```
+
+- [ ] **Step 2: Add nav CSS inside the `<style>` block (after the shared heading rules)**
+
+```css
+/* ── NAVIGATION ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.nav__logo {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+.nav__links {
+  display: flex;
+  gap: 32px;
+}
+.nav__links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text);
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav__links a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-accent);
+}
+.nav__icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav__icon-btn {
+  display: flex;
+  align-items: center;
+  color: var(--color-text);
+  cursor: pointer;
+}
+.nav__icon-btn:hover { opacity: 0.6; }
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Expected:
+- Sticky bar at top, 64px height, white background, grey bottom border
+- "FORMÉ" on the left in bold uppercase with visible letter-spacing
+- "Shop · About · Blog" centered
+- Two icon buttons on the right
+- Hover on nav links shows underline
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add sticky navigation bar"
+```
+
+---
+
+## Chunk 2: Hero Section
+
+### Task 3: Hero section
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add hero HTML (after the `</header>` closing tag)**
+
+```html
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <span class="tag">New Collection</span>
+      <h1 class="hero__headline">Designed<br>for daily life.</h1>
+      <a href="#" class="btn btn--primary">Shop Now</a>
+    </div>
+    <div class="hero__image-wrap">
+      <div class="hero__img-placeholder" role="img" aria-label="Hero product — 3D printed desk object"></div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add hero CSS**
+
+```css
+/* ── SHARED BUTTON ── */
+.btn {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.85; }
+.btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ── SHARED TAG ── */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--color-bg-alt);
+  min-height: 90vh;
+}
+.hero__inner {
+  display: flex;
+  align-items: center;
+  min-height: 90vh;
+}
+.hero__content {
+  flex: 0 0 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 60px 0;
+}
+.hero__headline {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+.hero__image-wrap {
+  flex: 0 0 45%;
+  display: flex;
+  align-items: stretch;
+  min-height: 90vh;
+}
+.hero__img-placeholder {
+  width: 100%;
+  background: var(--color-placeholder);
+  aspect-ratio: 4 / 5;
+  align-self: center;
+}
+/* NOTE: When replacing the placeholder div with a real <img>, add:
+   object-fit: cover; width: 100%; height: 100%;
+   to the <img> tag — spec requires object-fit: cover (spec line 122). */
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Expected:
+- Section fills 90vh of the viewport, light grey background
+- Left column: "NEW COLLECTION" tag in grey caps → large "Designed / for daily life." headline → charcoal "SHOP NOW" button — verify headline line-height is visually tight (lines close together, NOT the default 1.5 spacing)
+- Right column: grey placeholder box with 4:5 portrait aspect ratio
+- 24px vertical gap between each element in left column
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add hero section with placeholder image"
+```
+
+---
+
+## Chunk 3: Categories & Featured Products
+
+### Task 4: Browse by Category section
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add categories HTML (after `</section>` hero closing tag)**
+
+```html
+<!-- ── CATEGORIES ── -->
+<section class="categories">
+  <div class="container">
+    <h2 class="section-heading">Browse by category</h2>
+    <div class="categories__grid">
+
+      <!-- Row 1 (3 tiles) -->
+      <a href="#" class="cat-tile">
+        <div class="cat-tile__img" role="img" aria-label="Desk Organizers — 3D printed objects"></div>
+        <span class="cat-tile__label">Desk Organizers</span>
+      </a>
+      <a href="#" class="cat-tile">
+        <div class="cat-tile__img" role="img" aria-label="Phone Stands — 3D printed objects"></div>
+        <span class="cat-tile__label">Phone Stands</span>
+      </a>
+      <a href="#" class="cat-tile">
+        <div class="cat-tile__img" role="img" aria-label="Cable Clips — 3D printed objects"></div>
+        <span class="cat-tile__label">Cable Clips</span>
+      </a>
+
+      <!-- Row 2 (2 tiles, centered) -->
+      <a href="#" class="cat-tile cat-tile--row2-left">
+        <div class="cat-tile__img" role="img" aria-label="Planters — 3D printed objects"></div>
+        <span class="cat-tile__label">Planters</span>
+      </a>
+      <a href="#" class="cat-tile cat-tile--row2-right">
+        <div class="cat-tile__img" role="img" aria-label="Kitchen Tools — 3D printed objects"></div>
+        <span class="cat-tile__label">Kitchen Tools</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add categories CSS**
+
+```css
+/* ── CATEGORIES ── */
+.categories {
+  background: var(--color-bg);
+  padding: 60px 0;
+}
+.categories .section-heading { margin-bottom: 32px; }
+.categories__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+.cat-tile {
+  grid-column: span 2;
+  background: var(--color-bg-soft);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cat-tile:hover { background: var(--color-border); }
+.cat-tile--row2-left  { grid-column: 2 / span 2; }
+.cat-tile--row2-right { grid-column: 4 / span 2; }
+.cat-tile__img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--color-placeholder);
+  border-radius: 8px;
+}
+.cat-tile__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 10px;
+  text-align: center;
+}
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Expected:
+- Section heading "Browse by category" left-aligned
+- 3 tiles on row 1, filling full width
+- 2 tiles on row 2, centered (gap on left and right sides)
+- Each tile: grey placeholder square + label below, rounded corners
+- Hover darkens the tile background
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add browse by category section"
+```
+
+---
+
+### Task 5: Featured Products section
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add products HTML (after categories `</section>`)**
+
+```html
+<!-- ── FEATURED PRODUCTS ── -->
+<section class="products">
+  <div class="container">
+    <h2 class="section-heading">Featured products</h2>
+    <p class="section-subtext">Trending this week</p>
+    <div class="products__grid">
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Minimal Desk Tray"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Minimal Desk Tray</span>
+          <span class="product-card__price">$24.00</span>
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Cable Clip Set"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Cable Clip Set</span>
+          <span class="product-card__price">$12.00</span>
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Phone Stand"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Phone Stand</span>
+          <span class="product-card__price">$18.00</span>
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Mini Planter"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Mini Planter</span>
+          <span class="product-card__price">$16.00</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add products CSS**
+
+```css
+/* ── FEATURED PRODUCTS ── */
+.products {
+  background: var(--color-bg-alt);
+  padding: 60px 0;
+}
+.products .section-heading { margin-bottom: 0; }
+.products .section-subtext  { margin-bottom: 32px; }
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.product-card {
+  background: var(--color-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.product-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.product-card__img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #F0F0F0;
+}
+.product-card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+.product-card__name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.product-card__price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Expected:
+- Section on grey background, heading + "Trending this week" subtext
+- 2×2 grid of product cards, each with a grey square placeholder, product name left, price right
+- Hover lifts the card with subtle shadow
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add featured products section"
+```
+
+---
+
+## Chunk 4: Articles & Testimonials
+
+### Task 6: Articles section
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add articles HTML (after products `</section>`)**
+
+```html
+<!-- ── ARTICLES ── -->
+<section class="articles">
+  <div class="container">
+    <h2 class="section-heading">Explore our articles</h2>
+    <p class="section-subtext">Tips, ideas &amp; updates</p>
+    <div class="articles__grid">
+
+      <article class="article-card">
+        <div class="article-card__img" role="img" aria-label="Article: How we design for daily use"></div>
+        <span class="tag article-card__tag">Design</span>
+        <h3 class="article-card__title">How we design for daily use</h3>
+        <a href="#" class="article-card__link">Read more →</a>
+      </article>
+
+      <article class="article-card">
+        <div class="article-card__img" role="img" aria-label="Article: The filaments we use &amp; why"></div>
+        <span class="tag article-card__tag">Materials</span>
+        <h3 class="article-card__title">The filaments we use &amp; why</h3>
+        <a href="#" class="article-card__link">Read more →</a>
+      </article>
+
+      <article class="article-card">
+        <div class="article-card__img" role="img" aria-label="Article: Organise your desk in 5 steps"></div>
+        <span class="tag article-card__tag">Ideas</span>
+        <h3 class="article-card__title">Organise your desk in 5 steps</h3>
+        <a href="#" class="article-card__link">Read more →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add articles CSS**
+
+```css
+/* ── ARTICLES ── */
+.articles {
+  background: var(--color-bg);
+  padding: 60px 0;
+}
+.articles .section-heading { margin-bottom: 0; }
+.articles .section-subtext  { margin-bottom: 32px; }
+.articles__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.article-card { display: flex; flex-direction: column; }
+.article-card__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #E8E8E8;
+  border-radius: 10px;
+}
+.article-card__tag { margin-top: 10px; }
+.article-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+.article-card__link {
+  font-size: 12px;
+  color: var(--color-muted);
+  margin-top: 8px;
+  display: inline-block;
+  transition: color 0.2s;
+}
+.article-card__link:hover { color: var(--color-accent); }
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Expected:
+- 3-column grid of article cards on white background
+- Each: grey 4:3 image placeholder → tag in grey caps → bold title → "Read more →" link
+- "Read more →" turns charcoal on hover
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add articles section"
+```
+
+---
+
+### Task 7: Testimonials section
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add testimonials HTML (after articles `</section>`)**
+
+```html
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-heading">What customers are saying</h2>
+    <div class="testimonials__grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote-mark">&ldquo;</div>
+        <p class="testimonial-card__text">Beautifully crafted. Exactly what my desk needed.</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" role="img" aria-label="Sarah K.'s avatar"></div>
+          <div class="testimonial-card__meta">
+            <span class="testimonial-card__name">Sarah K.</span>
+            <span class="testimonial-card__handle">@sarahk</span>
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote-mark">&ldquo;</div>
+        <p class="testimonial-card__text">Fast shipping, perfect quality. Will order again.</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" role="img" aria-label="James R.'s avatar"></div>
+          <div class="testimonial-card__meta">
+            <span class="testimonial-card__name">James R.</span>
+            <span class="testimonial-card__handle">@james_r</span>
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add testimonials CSS**
+
+```css
+/* ── TESTIMONIALS ── */
+.testimonials {
+  background: var(--color-bg-alt);
+  padding: 60px 0;
+}
+.testimonials .section-heading { margin-bottom: 32px; }
+.testimonials__grid {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+.testimonial-card {
+  flex: 1;
+  background: var(--color-bg);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.testimonial-card__quote-mark {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--color-border);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.testimonial-card__text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-soft);
+  flex: 1;
+}
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.testimonial-card__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-placeholder);
+  flex-shrink: 0;
+}
+.testimonial-card__meta {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.testimonial-card__name  { font-size: 13px; font-weight: 600; }
+.testimonial-card__handle { font-size: 12px; color: var(--color-muted); }
+.testimonial-card__stars {
+  font-size: 12px;
+  color: var(--color-accent);
+  letter-spacing: 1px;
+}
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Expected:
+- Two side-by-side cards with equal height (flex stretch)
+- Large decorative `"` in light grey
+- Quote text in dark soft grey
+- Avatar placeholder (round), name, handle, and ★★★★★ in charcoal
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add testimonials section"
+```
+
+---
+
+## Chunk 5: Newsletter, Footer & Responsive Breakpoints
+
+### Task 8: Newsletter section
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add newsletter HTML (after testimonials `</section>`)**
+
+```html
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter__inner">
+      <h2 class="newsletter__heading">Subscribe &amp; get 15% off</h2>
+      <p class="newsletter__subtext">Join the Formé community</p>
+      <div class="newsletter__form-wrap">
+        <form class="newsletter__form" id="newsletter-form" novalidate>
+          <input
+            type="email"
+            class="newsletter__input"
+            id="newsletter-email"
+            placeholder="Your email address"
+            aria-label="Email address"
+          >
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+        </form>
+        <p class="newsletter__error" id="newsletter-error" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+- [ ] **Step 2: Add newsletter CSS**
+
+```css
+/* ── NEWSLETTER ── */
+.newsletter {
+  background: var(--color-bg-soft);
+  padding: 60px 0;
+}
+.newsletter__inner {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+.newsletter__heading {
+  font-size: 28px;
+  font-weight: 700;
+}
+.newsletter__subtext {
+  font-size: 14px;
+  color: var(--color-muted);
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+.newsletter__form-wrap { position: relative; }
+.newsletter__form {
+  display: flex;
+  gap: 8px;
+}
+/* Subscribe button has tighter padding than the hero CTA — spec line 203 */
+.newsletter__form .btn { padding: 12px 24px; }
+.newsletter__input {
+  flex: 1;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-family: var(--font-base);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.newsletter__input:focus { border-color: var(--color-accent); }
+.newsletter__input.input--error { border-color: red; }
+.newsletter__error {
+  font-size: 12px;
+  color: red;
+  margin-top: 6px;
+  min-height: 18px;
+  text-align: left;
+}
+.newsletter__success {
+  font-size: 14px;
+  color: var(--color-accent);
+  text-align: center;
+}
+```
+
+- [ ] **Step 3: Add newsletter JS (replace the `// JS will go here` comment in `<script>`)**
+
+```javascript
+(function() {
+  const form   = document.getElementById('newsletter-form');
+  const input  = document.getElementById('newsletter-email');
+  const error  = document.getElementById('newsletter-error');
+  const wrap   = document.querySelector('.newsletter__form-wrap');
+
+  if (!form) return;
+
+  // Clear error on input
+  input.addEventListener('input', function() {
+    input.classList.remove('input--error');
+    error.textContent = '';
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const val = input.value.trim();
+    const valid = /\S+@\S+\.\S+/.test(val);
+
+    if (!valid) {
+      input.classList.add('input--error');
+      error.textContent = 'Please enter a valid email.';
+      input.focus();
+      return;
+    }
+
+    // Success state
+    wrap.innerHTML = '<p class="newsletter__success">You\'re in! Check your inbox.</p>';
+  });
+})();
+```
+
+- [ ] **Step 4: Verify in browser**
+
+Expected:
+- Centered soft-grey section with heading, subtext, and inline form
+- Submitting empty → red border on input + "Please enter a valid email." message
+- Typing → error clears immediately
+- Valid email submit → form replaced with "You're in! Check your inbox."
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add newsletter section with client-side validation"
+```
+
+---
+
+### Task 9: Footer
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add footer HTML (after newsletter `</section>`, before `<script>`)**
+
+```html
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container footer__top">
+    <div class="footer__brand">
+      <span class="footer__logo">FORMÉ</span>
+      <div class="footer__socials">
+        <a href="#" aria-label="Instagram" class="footer__social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        </a>
+        <a href="#" aria-label="Pinterest" class="footer__social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+        <a href="#" aria-label="X (Twitter)" class="footer__social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer__links">
+      <div class="footer__col">
+        <span class="footer__col-heading">Shop</span>
+        <a href="#">All Products</a>
+        <a href="#">Categories</a>
+        <a href="#">New In</a>
+      </div>
+      <div class="footer__col">
+        <span class="footer__col-heading">Info</span>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© 2026 Formé · All rights reserved</span>
+  </div>
+</footer>
+```
+
+- [ ] **Step 2: Add footer CSS**
+
+```css
+/* ── FOOTER ── */
+.footer {
+  background: var(--color-footer-bg);
+  color: var(--color-muted);
+}
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 48px 0 32px;
+}
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.footer__logo {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.footer__socials {
+  display: flex;
+  gap: 12px;
+}
+.footer__social-link {
+  color: #555;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.footer__social-link:hover { color: #fff; }
+.footer__links {
+  display: flex;
+  gap: 48px;
+}
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer__col-heading {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 4px;
+}
+.footer__col a {
+  font-size: 12px;
+  color: var(--color-muted);
+  transition: color 0.2s;
+}
+.footer__col a:hover { color: #fff; }
+.footer__bottom {
+  border-top: 1px solid #2A2A2A;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  font-size: 11px;
+  color: #555;
+}
+```
+
+- [ ] **Step 3: Verify in browser**
+
+Expected:
+- Dark `#1A1A1A` footer, white "FORMÉ" logo top-left
+- Social icons below logo, grey with white on hover
+- Two link columns top-right: Shop and Info
+- Bottom bar with thin divider and copyright text
+- All links turn white on hover
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add footer with social icons and link columns"
+```
+
+---
+
+### Task 10: Responsive breakpoints
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add responsive CSS at the end of the `<style>` block (after all section styles)**
+
+```css
+/* ── RESPONSIVE: TABLET (768px – 1199px) ── */
+@media (max-width: 1199px) {
+  /* Categories: 4-column grid
+     Reset ALL tile column rules from desktop (row2 classes would cause overlaps)
+     Then tiles 1-4 each span 2 = 2 per row = 2 full rows.
+     Tile 5 (last) is centered: col 2–3 in a 4-col grid. */
+  .categories__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cat-tile,
+  .cat-tile--row2-left,
+  .cat-tile--row2-right { grid-column: span 2; }
+  .cat-tile:last-child  { grid-column: 2 / span 2; }
+
+  /* Hero: 50/50 split at tablet (spec line 229) */
+  .hero__content    { flex: 0 0 50%; }
+  .hero__image-wrap { flex: 0 0 50%; }
+
+  /* Articles: 2 columns */
+  .articles__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── RESPONSIVE: MOBILE (< 768px) ── */
+@media (max-width: 767px) {
+
+  /* Nav: logo + cart only */
+  .nav__links  { display: none; }
+  .nav__search { display: none; }
+
+  /* Hero: remove 90vh min-height so section sizes to content */
+  .hero { min-height: auto; }
+
+  /* Hero: stacked, image above text */
+  .hero__inner {
+    flex-direction: column-reverse;
+    min-height: auto;
+    padding: 40px 0;
+  }
+  .hero__content {
+    flex: none;
+    width: 100%;
+    padding: 32px 0 0;
+  }
+  .hero__headline { font-size: 32px; }
+  .hero__image-wrap {
+    flex: none;
+    width: 100%;
+    min-height: auto;
+  }
+  .hero__img-placeholder { aspect-ratio: 16 / 9; }
+
+  /* Categories: 2 columns, natural flow */
+  .categories__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cat-tile,
+  .cat-tile--row2-left,
+  .cat-tile--row2-right,
+  .cat-tile:last-child {
+    grid-column: span 1;
+  }
+
+  /* Products: 2 columns (already 2-col, stays) */
+
+  /* Articles: 1 column */
+  .articles__grid { grid-template-columns: 1fr; }
+
+  /* Testimonials: 1 column */
+  .testimonials__grid { flex-direction: column; }
+
+  /* Newsletter form: stacked */
+  .newsletter__form { flex-direction: column; }
+  .newsletter__form .btn { width: 100%; }
+
+  /* Footer: stacked */
+  .footer__top {
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px 0 24px;
+  }
+  .footer__links { gap: 32px; }
+}
+```
+
+- [ ] **Step 2: Verify at each breakpoint in browser DevTools (Toggle Device Toolbar)**
+
+**Desktop (1280px):**
+- Full 6-column category grid (3+2)
+- 2×2 product grid
+- 3-column articles
+- 2-column testimonials
+- Side-by-side hero
+
+**Tablet (900px):**
+- Category grid: 4 columns, 2+2+1 layout (last tile centered)
+- Articles: 2 columns
+- Testimonials: still 2 columns
+- Hero: still side by side
+
+**Mobile (375px):**
+- Nav: only logo + cart visible
+- Hero: image on top, text below, headline 32px
+- Categories: 2-column grid, 5 tiles flow naturally
+- Products: 2-column grid
+- Articles: 1 column
+- Testimonials: 1 column stacked
+- Newsletter: stacked form, full-width button
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add responsive breakpoints for tablet and mobile"
+```
+
+---
+
+### Task 11: Final polish pass
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Scroll the full page on desktop and visually check each section against the spec**
+
+Checklist:
+- [ ] Nav is sticky and shows correctly on scroll
+- [ ] Hero: tag, headline (two lines), button visible; 55/45 columns correct
+- [ ] Categories: 6-col grid, 3 + 2 centered tiles, hover state works
+- [ ] Products: 2×2 cards, name + price correct, hover lift works
+- [ ] Articles: 3-col, image + tag + title + read more link, hover on link works
+- [ ] Testimonials: quote mark, text, avatar circle, name + handle, ★★★★★
+- [ ] Newsletter: heading, subtext, form, validation works (empty + invalid + valid)
+- [ ] Footer: logo, social icons, two link columns, copyright, hover states work
+
+- [ ] **Step 2: Run newsletter validation edge cases**
+
+In browser:
+1. Click Subscribe with empty field → expect: red border + error text
+2. Start typing → expect: error clears immediately
+3. Type "notanemail" → expect: still invalid, error on submit
+4. Type "user@example.com" → expect: success message replaces form
+
+- [ ] **Step 3: Check keyboard navigation**
+
+Tab through the page. Every interactive element (nav links, buttons, category tiles, product cards, article links, newsletter input + button, footer links) should show the `2px solid #2D2D2D` focus outline.
+
+- [ ] **Step 4: Final commit**
+
+```bash
+git add index.html
+git commit -m "feat: complete Formé landing page — all sections, responsive, validated"
+```
+
+---
+
+## Summary
+
+| Task | Section | Commit |
+|---|---|---|
+| 1 | HTML scaffold + CSS tokens | `feat: scaffold index.html with CSS tokens and reset` |
+| 2 | Navigation | `feat: add sticky navigation bar` |
+| 3 | Hero | `feat: add hero section with placeholder image` |
+| 4 | Categories | `feat: add browse by category section` |
+| 5 | Featured Products | `feat: add featured products section` |
+| 6 | Articles | `feat: add articles section` |
+| 7 | Testimonials | `feat: add testimonials section` |
+| 8 | Newsletter + JS | `feat: add newsletter section with client-side validation` |
+| 9 | Footer | `feat: add footer with social icons and link columns` |
+| 10 | Responsive | `feat: add responsive breakpoints for tablet and mobile` |
+| 11 | Polish & verify | `feat: complete Formé landing page — all sections, responsive, validated` |
+
+**Output:** `index.html` — open directly in any browser, no server required.
+To replace placeholder images: find the `div` elements with class `hero__img-placeholder`, `cat-tile__img`, `product-card__img`, `article-card__img`, or `testimonial-card__avatar` and replace with `<img src="your-image.jpg" ...>`.
