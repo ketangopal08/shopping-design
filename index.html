@@ -221,6 +221,50 @@
       text-align: center;
     }
 
+    /* ── FEATURED PRODUCTS ── */
+    .products {
+      background: var(--color-bg-alt);
+      padding: 60px 0;
+    }
+    .products .section-heading { margin-bottom: 0; }
+    .products .section-subtext  { margin-bottom: 32px; }
+    .products__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .product-card {
+      background: var(--color-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .product-card__img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #F0F0F0;
+    }
+    .product-card__info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+    }
+    .product-card__name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .product-card__price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
   </style>
 </head>
 <body>
@@ -287,6 +331,49 @@
       <a href="#" class="cat-tile cat-tile--row2-right">
         <div class="cat-tile__img" role="img" aria-label="Kitchen Tools — 3D printed objects"></div>
         <span class="cat-tile__label">Kitchen Tools</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED PRODUCTS ── -->
+<section class="products">
+  <div class="container">
+    <h2 class="section-heading">Featured products</h2>
+    <p class="section-subtext">Trending this week</p>
+    <div class="products__grid">
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Minimal Desk Tray"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Minimal Desk Tray</span>
+          <span class="product-card__price">$24.00</span>
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Cable Clip Set"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Cable Clip Set</span>
+          <span class="product-card__price">$12.00</span>
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Phone Stand"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Phone Stand</span>
+          <span class="product-card__price">$18.00</span>
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-card__img" role="img" aria-label="Mini Planter"></div>
+        <div class="product-card__info">
+          <span class="product-card__name">Mini Planter</span>
+          <span class="product-card__price">$16.00</span>
+        </div>
       </a>
 
     </div>
