@@ -359,6 +359,58 @@
       letter-spacing: 1px;
     }
 
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: var(--color-bg-soft);
+      padding: 60px 0;
+    }
+    .newsletter__inner {
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .newsletter__heading {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .newsletter__subtext {
+      font-size: 14px;
+      color: var(--color-muted);
+      margin-top: 8px;
+      margin-bottom: 24px;
+    }
+    .newsletter__form-wrap { position: relative; }
+    .newsletter__form {
+      display: flex;
+      gap: 8px;
+    }
+    /* Subscribe button has tighter padding than the hero CTA — spec line 203 */
+    .newsletter__form .btn { padding: 12px 24px; }
+    .newsletter__input {
+      flex: 1;
+      border: 1px solid #DDDDDD;
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-family: var(--font-base);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter__input:focus { border-color: var(--color-accent); }
+    .newsletter__input.input--error { border-color: red; }
+    .newsletter__error {
+      font-size: 12px;
+      color: red;
+      margin-top: 6px;
+      min-height: 18px;
+      text-align: left;
+    }
+    .newsletter__success {
+      font-size: 14px;
+      color: var(--color-accent);
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -542,10 +594,62 @@
   </div>
 </section>
 
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter__inner">
+      <h2 class="newsletter__heading">Subscribe &amp; get 15% off</h2>
+      <p class="newsletter__subtext">Join the Formé community</p>
+      <div class="newsletter__form-wrap">
+        <form class="newsletter__form" id="newsletter-form" novalidate>
+          <input
+            type="email"
+            class="newsletter__input"
+            id="newsletter-email"
+            placeholder="Your email address"
+            aria-label="Email address"
+          >
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+        </form>
+        <p class="newsletter__error" id="newsletter-error" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
   <!-- sections will go here -->
 
   <script>
-    // JS will go here
+    (function() {
+  const form   = document.getElementById('newsletter-form');
+  const input  = document.getElementById('newsletter-email');
+  const error  = document.getElementById('newsletter-error');
+  const wrap   = document.querySelector('.newsletter__form-wrap');
+
+  if (!form) return;
+
+  // Clear error on input
+  input.addEventListener('input', function() {
+    input.classList.remove('input--error');
+    error.textContent = '';
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const val = input.value.trim();
+    const valid = /\S+@\S+\.\S+/.test(val);
+
+    if (!valid) {
+      input.classList.add('input--error');
+      error.textContent = 'Please enter a valid email.';
+      input.focus();
+      return;
+    }
+
+    // Success state
+    wrap.innerHTML = '<p class="newsletter__success">You\'re in! Check your inbox.</p>';
+  });
+})();
   </script>
 </body>
 </html>
