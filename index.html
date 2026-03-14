@@ -300,6 +300,65 @@
     }
     .article-card__link:hover { color: var(--color-accent); }
 
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: var(--color-bg-alt);
+      padding: 60px 0;
+    }
+    .testimonials .section-heading { margin-bottom: 32px; }
+    .testimonials__grid {
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .testimonial-card {
+      flex: 1;
+      background: var(--color-bg);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .testimonial-card__quote-mark {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--color-border);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .testimonial-card__text {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--color-soft);
+      flex: 1;
+    }
+    .testimonial-card__author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .testimonial-card__avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-placeholder);
+      flex-shrink: 0;
+    }
+    .testimonial-card__meta {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .testimonial-card__name  { font-size: 13px; font-weight: 600; }
+    .testimonial-card__handle { font-size: 12px; color: var(--color-muted); }
+    .testimonial-card__stars {
+      font-size: 12px;
+      color: var(--color-accent);
+      letter-spacing: 1px;
+    }
+
   </style>
 </head>
 <body>
@@ -442,6 +501,42 @@
         <h3 class="article-card__title">Organise your desk in 5 steps</h3>
         <a href="#" class="article-card__link">Read more →</a>
       </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-heading">What customers are saying</h2>
+    <div class="testimonials__grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote-mark">&ldquo;</div>
+        <p class="testimonial-card__text">Beautifully crafted. Exactly what my desk needed.</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" role="img" aria-label="Sarah K.'s avatar"></div>
+          <div class="testimonial-card__meta">
+            <span class="testimonial-card__name">Sarah K.</span>
+            <span class="testimonial-card__handle">@sarahk</span>
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote-mark">&ldquo;</div>
+        <p class="testimonial-card__text">Fast shipping, perfect quality. Will order again.</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" role="img" aria-label="James R.'s avatar"></div>
+          <div class="testimonial-card__meta">
+            <span class="testimonial-card__name">James R.</span>
+            <span class="testimonial-card__handle">@james_r</span>
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </div>
+      </div>
 
     </div>
   </div>
