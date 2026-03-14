@@ -265,6 +265,41 @@
       color: var(--color-accent);
     }
 
+    /* ── ARTICLES ── */
+    .articles {
+      background: var(--color-bg);
+      padding: 60px 0;
+    }
+    .articles .section-heading { margin-bottom: 0; }
+    .articles .section-subtext  { margin-bottom: 32px; }
+    .articles__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .article-card { display: flex; flex-direction: column; }
+    .article-card__img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #E8E8E8;
+      border-radius: 10px;
+    }
+    .article-card__tag { margin-top: 10px; }
+    .article-card__title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+    .article-card__link {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-top: 8px;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+    .article-card__link:hover { color: var(--color-accent); }
+
   </style>
 </head>
 <body>
@@ -375,6 +410,38 @@
           <span class="product-card__price">$16.00</span>
         </div>
       </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ARTICLES ── -->
+<section class="articles">
+  <div class="container">
+    <h2 class="section-heading">Explore our articles</h2>
+    <p class="section-subtext">Tips, ideas &amp; updates</p>
+    <div class="articles__grid">
+
+      <article class="article-card">
+        <div class="article-card__img" role="img" aria-label="Article: How we design for daily use"></div>
+        <span class="tag article-card__tag">Design</span>
+        <h3 class="article-card__title">How we design for daily use</h3>
+        <a href="#" class="article-card__link">Read more →</a>
+      </article>
+
+      <article class="article-card">
+        <div class="article-card__img" role="img" aria-label="Article: The filaments we use &amp; why"></div>
+        <span class="tag article-card__tag">Materials</span>
+        <h3 class="article-card__title">The filaments we use &amp; why</h3>
+        <a href="#" class="article-card__link">Read more →</a>
+      </article>
+
+      <article class="article-card">
+        <div class="article-card__img" role="img" aria-label="Article: Organise your desk in 5 steps"></div>
+        <span class="tag article-card__tag">Ideas</span>
+        <h3 class="article-card__title">Organise your desk in 5 steps</h3>
+        <a href="#" class="article-card__link">Read more →</a>
+      </article>
 
     </div>
   </div>
