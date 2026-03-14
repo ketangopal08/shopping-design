@@ -182,6 +182,45 @@
     }
     .nav__icon-btn:hover { opacity: 0.6; }
 
+    /* ── CATEGORIES ── */
+    .categories {
+      background: var(--color-bg);
+      padding: 60px 0;
+    }
+    .categories .section-heading { margin-bottom: 32px; }
+    .categories__grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+    .cat-tile {
+      grid-column: span 2;
+      background: var(--color-bg-soft);
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cat-tile:hover { background: var(--color-border); }
+    .cat-tile--row2-left  { grid-column: 2 / span 2; }
+    .cat-tile--row2-right { grid-column: 4 / span 2; }
+    .cat-tile__img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--color-placeholder);
+      border-radius: 8px;
+    }
+    .cat-tile__label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: 10px;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -216,6 +255,40 @@
     </div>
     <div class="hero__image-wrap">
       <div class="hero__img-placeholder" role="img" aria-label="Hero product — 3D printed desk object"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ── -->
+<section class="categories">
+  <div class="container">
+    <h2 class="section-heading">Browse by category</h2>
+    <div class="categories__grid">
+
+      <!-- Row 1 (3 tiles) -->
+      <a href="#" class="cat-tile">
+        <div class="cat-tile__img" role="img" aria-label="Desk Organizers — 3D printed objects"></div>
+        <span class="cat-tile__label">Desk Organizers</span>
+      </a>
+      <a href="#" class="cat-tile">
+        <div class="cat-tile__img" role="img" aria-label="Phone Stands — 3D printed objects"></div>
+        <span class="cat-tile__label">Phone Stands</span>
+      </a>
+      <a href="#" class="cat-tile">
+        <div class="cat-tile__img" role="img" aria-label="Cable Clips — 3D printed objects"></div>
+        <span class="cat-tile__label">Cable Clips</span>
+      </a>
+
+      <!-- Row 2 (2 tiles, centered) -->
+      <a href="#" class="cat-tile cat-tile--row2-left">
+        <div class="cat-tile__img" role="img" aria-label="Planters — 3D printed objects"></div>
+        <span class="cat-tile__label">Planters</span>
+      </a>
+      <a href="#" class="cat-tile cat-tile--row2-right">
+        <div class="cat-tile__img" role="img" aria-label="Kitchen Tools — 3D printed objects"></div>
+        <span class="cat-tile__label">Kitchen Tools</span>
+      </a>
+
     </div>
   </div>
 </section>
