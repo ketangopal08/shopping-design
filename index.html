@@ -89,66 +89,31 @@
       color: var(--color-muted);
     }
 
-    /* ── HERO ── */
-    .hero {
-      background: var(--color-bg-alt);
-      min-height: 90vh;
-    }
-    .hero__inner {
-      display: flex;
-      align-items: center;
-      min-height: 90vh;
-    }
-    .hero__content {
-      flex: 0 0 55%;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      padding: 60px 0;
-    }
-    .hero__headline {
-      font-size: 52px;
-      font-weight: 700;
-      line-height: 1.1;
-      color: var(--color-text);
-    }
-    .hero__image-wrap {
-      flex: 0 0 45%;
-      display: flex;
-      align-items: stretch;
-      min-height: 90vh;
-    }
-    .hero__img-placeholder {
-      width: 100%;
-      background: var(--color-placeholder);
-      aspect-ratio: 4 / 5;
-      align-self: center;
-    }
-    /* NOTE: When replacing the placeholder div with a real <img>, add:
-       object-fit: cover; width: 100%; height: 100%;
-       to the <img> tag — spec requires object-fit: cover. */
-
     /* ── NAVIGATION ── */
     .nav {
       position: sticky;
       top: 0;
       z-index: 100;
       height: 64px;
-      background: var(--color-bg);
-      border-bottom: 1px solid var(--color-border);
+      background: rgba(242, 242, 242, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     }
     .nav__inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 100%;
+      padding: 0 20px;
+      max-width: 100%;
     }
     .nav__logo {
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      letter-spacing: -0.5px;
       color: var(--color-text);
+      text-decoration: none;
     }
     .nav__links {
       display: flex;
@@ -157,113 +122,555 @@
     .nav__links a {
       font-size: 13px;
       font-weight: 400;
-      color: var(--color-text);
-      position: relative;
-      padding-bottom: 2px;
+      color: var(--color-muted);
+      transition: color 0.15s;
     }
-    .nav__links a:hover::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--color-accent);
-    }
+    .nav__links a:hover { color: var(--color-text); }
     .nav__icons {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 8px;
     }
     .nav__icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #E8E8E8;
+      border: none;
+      cursor: pointer;
       display: flex;
       align-items: center;
+      justify-content: center;
       color: var(--color-text);
-      cursor: pointer;
+      transition: background 0.15s;
     }
-    .nav__icon-btn:hover { opacity: 0.6; }
+    .nav__icon-btn:hover { background: var(--color-border); }
+
+    /* ── HERO (etec card layout) ── */
+    .hero {
+      background: #F2F2F2;
+      padding: 40px;
+    }
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      height: calc(100vh - 64px - 80px);
+      min-height: 520px;
+    }
+    .hero__left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* Top card: headline + CTA */
+    .hero__text-wrap {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hero__tag-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .hero__headline {
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      color: var(--color-text);
+      max-width: 340px;
+    }
+    .hero__sub {
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .hero__cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+    }
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--color-text);
+      color: #fff;
+      font-family: var(--font-base);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      border: none;
+      border-radius: 100px;
+      padding: 12px 22px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn-pill:hover { opacity: 0.82; }
+    .btn-circle-dark {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-text);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.15s;
+    }
+    .btn-circle-dark:hover { opacity: 0.82; }
+    /* Bottom card: eWatch */
+    .hero__watch-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .watch-card__label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .watch-card__name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+    .watch-card__sub {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-bottom: 12px;
+    }
+    .watch-card__price { font-size: 14px; font-weight: 700; color: var(--color-text); }
+    .watch-card__image {
+      width: 110px;
+      height: 90px;
+      background: #F0EFED;
+      border-radius: 14px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Right column: full-bleed image card */
+    .hero__headphones-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero__headphones-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .featured-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text);
+      z-index: 2;
+    }
+    .featured-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4CAF50;
+      flex-shrink: 0;
+    }
+    .headphones-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 0 0 20px 20px;
+      z-index: 2;
+    }
+    .headphones-footer__name { font-size: 15px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+    .headphones-footer__sub  { font-size: 12px; color: #666666; }
+    .headphones-footer__price { font-size: 15px; font-weight: 700; color: #1A1A1A; white-space: nowrap; }
 
     /* ── CATEGORIES ── */
+    /* ── CATEGORIES (Bento layout) ── */
     .categories {
       background: var(--color-bg);
       padding: 60px 0;
     }
-    .categories .section-heading { margin-bottom: 32px; }
-    .categories__grid {
+
+    .categories__header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .categories__title {
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 700;
+      color: var(--color-text);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .categories__subtitle {
+      font-size: 14px;
+      color: var(--color-muted);
+      max-width: 380px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Bento grid: left large | right stacked */
+    .categories__bento {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
-    .cat-tile {
-      grid-column: span 2;
-      background: var(--color-bg-soft);
-      border-radius: 12px;
-      padding: 20px;
+
+    /* ── Arrow button (shared) ── */
+    .btn-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-text);
+      color: #fff;
+      border: none;
       cursor: pointer;
-      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.15s;
+    }
+    .btn-arrow:hover { opacity: 0.75; }
+
+    .btn-view-more {
+      display: inline-flex;
+      align-items: center;
+      background: #fff;
+      color: var(--color-text);
+      font-family: var(--color-font, inherit);
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      border-radius: 100px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-view-more:hover { background: #E8E8E8; }
+
+    /* ── Left: Featured card ── */
+    .cat-featured {
+      background: #F0F0F0;
+      border-radius: 20px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cat-featured:hover { background: #E8E8E8; }
+
+    .cat-featured__image {
+      flex: 1;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      padding: 16px 0 28px;
+      min-height: 260px;
     }
-    .cat-tile:hover { background: var(--color-border); }
-    .cat-tile--row2-left  { grid-column: 2 / span 2; }
-    .cat-tile--row2-right { grid-column: 4 / span 2; }
-    .cat-tile__img {
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--color-placeholder);
-      border-radius: 8px;
+    .cat-featured__image img {
+      max-width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
     }
-    .cat-tile__label {
-      font-size: 12px;
-      font-weight: 600;
+    .cat-featured:hover .cat-featured__image img { transform: scale(1.03); }
+
+    .cat-featured__title {
+      font-size: 22px;
+      font-weight: 700;
       color: var(--color-text);
-      margin-top: 10px;
-      text-align: center;
+      margin-bottom: 6px;
+    }
+    .cat-featured__desc {
+      font-size: 13px;
+      color: var(--color-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      max-width: 320px;
+    }
+    .cat-featured__cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── Right: stacked column ── */
+    .cat-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Wide card (top right) */
+    .cat-wide {
+      background: #F0F0F0;
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex: 1;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cat-wide:hover { background: #E8E8E8; }
+
+    .cat-wide__text { flex: 1; }
+    .cat-wide__title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 6px;
+    }
+    .cat-wide__desc {
+      font-size: 13px;
+      color: var(--color-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .cat-wide__cta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cat-wide__image {
+      width: 160px;
+      height: 140px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cat-wide__image img {
+      max-width: 100%;
+      max-height: 140px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .cat-wide:hover .cat-wide__image img { transform: scale(1.05); }
+
+    /* Bottom row: 2 equal cards */
+    .cat-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .cat-small {
+      background: #F0F0F0;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cat-small:hover { background: #E8E8E8; }
+
+    .cat-small__image {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0 16px;
+      min-height: 120px;
+    }
+    .cat-small__image img {
+      max-width: 100%;
+      max-height: 120px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .cat-small:hover .cat-small__image img { transform: scale(1.05); }
+
+    .cat-small__footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .cat-small__title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+    .cat-small__desc {
+      font-size: 12px;
+      color: var(--color-muted);
+      line-height: 1.4;
+      max-width: 160px;
     }
 
     /* ── FEATURED PRODUCTS ── */
+    /* ── FEATURED PRODUCTS ── */
     .products {
-      background: var(--color-bg-alt);
+      background: var(--color-bg);
       padding: 60px 0;
     }
-    .products .section-heading { margin-bottom: 0; }
-    .products .section-subtext  { margin-bottom: 32px; }
+
+    /* 2-column header (same pattern as articles) */
+    .products__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .products__heading {
+      font-size: clamp(28px, 3.2vw, 46px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      color: var(--color-text);
+      max-width: 520px;
+      flex: 1;
+    }
+
+    .products__header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 340px;
+      flex-shrink: 0;
+      padding-top: 4px;
+    }
+
+    .products__desc {
+      font-size: 14px;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+
+    .products__cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 4-col grid */
     .products__grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
+
+    /* Card: image + info strip */
     .product-card {
-      background: var(--color-bg);
-      border-radius: 12px;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-decoration: none;
       cursor: pointer;
-      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .product-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
-    }
-    .product-card__img {
+
+    .product-card__img-wrap {
       width: 100%;
       aspect-ratio: 1;
       background: #F0F0F0;
+      border-radius: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
+
+    .product-card__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .product-card:hover .product-card__img-wrap img {
+      transform: scale(1.05);
+    }
+
+    /* Info strip */
     .product-card__info {
+      background: #F0F0F0;
+      border-radius: 16px;
+      padding: 14px 18px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 12px 16px;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background 0.2s;
     }
+
+    .product-card:hover .product-card__info {
+      background: #E8E8E8;
+    }
+
+    .product-card__meta { flex: 1; }
+
     .product-card__name {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
+      color: #444444;
+      margin-bottom: 2px;
     }
+
     .product-card__price {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--color-accent);
+      color: var(--color-text);
     }
 
     /* ── ARTICLES ── */
@@ -284,6 +691,17 @@
       aspect-ratio: 4 / 3;
       background: #E8E8E8;
       border-radius: 10px;
+      overflow: hidden;
+    }
+    .article-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .article-card:hover .article-card__img img {
+      transform: scale(1.04);
     }
     .article-card__tag { margin-top: 10px; }
     .article-card__title {
@@ -291,15 +709,34 @@
       font-weight: 600;
       line-height: 1.4;
       margin-top: 6px;
+      color: var(--color-text);
     }
     .article-card__link {
       font-size: 12px;
       color: var(--color-muted);
       margin-top: 8px;
       display: inline-block;
+      text-decoration: none;
       transition: color 0.2s;
     }
-    .article-card__link:hover { color: var(--color-accent); }
+    .article-card__link:hover { color: var(--color-text); }
+
+    /* Light arrow button (used by products) */
+    .btn-arrow-light {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #E0E0E0;
+      color: var(--color-text);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .btn-arrow-light:hover { background: #D0D0D0; }
 
     /* ── TESTIMONIALS ── */
     .testimonials {
@@ -413,68 +850,134 @@
     }
 
     /* ── FOOTER ── */
+    /* ── FOOTER ── */
     .footer {
       background: var(--color-footer-bg);
       color: var(--color-muted);
     }
+
     .footer__top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 48px 0 32px;
+      display: grid;
+      grid-template-columns: 1.6fr repeat(4, 1fr);
+      gap: 48px;
+      padding: 72px 0 56px;
+      border-bottom: 1px solid #2A2A2A;
     }
+
     .footer__brand {
       display: flex;
       flex-direction: column;
       gap: 16px;
+      padding-right: 24px;
     }
+
     .footer__logo {
-      font-size: 16px;
+      font-size: 22px;
       font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      letter-spacing: -0.5px;
       color: #fff;
+      text-decoration: none;
     }
+
+    .footer__tagline {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+      max-width: 240px;
+    }
+
     .footer__socials {
       display: flex;
-      gap: 12px;
+      gap: 10px;
+      margin-top: 4px;
     }
+
     .footer__social-link {
-      color: #555;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2A2A2A;
+      color: #777;
       display: flex;
       align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .footer__social-link:hover { background: #333; color: #fff; }
+
+    .footer__contact {
+      margin-top: 4px;
+    }
+    .footer__contact p {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.8;
+    }
+    .footer__contact a {
+      font-size: 12px;
+      color: #777;
+      text-decoration: none;
       transition: color 0.2s;
     }
-    .footer__social-link:hover { color: #fff; }
-    .footer__links {
-      display: flex;
-      gap: 48px;
-    }
+    .footer__contact a:hover { color: #fff; }
+
     .footer__col {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
+
     .footer__col-heading {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #555;
+      color: #fff;
       margin-bottom: 4px;
     }
+
     .footer__col a {
-      font-size: 12px;
-      color: var(--color-muted);
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
       transition: color 0.2s;
+      line-height: 1;
     }
     .footer__col a:hover { color: #fff; }
+
     .footer__bottom {
-      border-top: 1px solid #2A2A2A;
-      padding-top: 16px;
-      padding-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      gap: 16px;
+    }
+
+    .footer__copy {
+      font-size: 12px;
+      color: #444;
+    }
+
+    .footer__bottom-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer__bottom-links a {
+      font-size: 12px;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer__bottom-links a:hover { color: #777; }
+
+    .footer__badge {
       font-size: 11px;
-      color: #555;
+      color: #333;
+      background: #222;
+      border-radius: 100px;
+      padding: 6px 14px;
+      letter-spacing: 0.3px;
     }
 
     /* ── RESPONSIVE: TABLET (768px – 1199px) ── */
@@ -483,65 +986,49 @@
          Reset ALL tile column rules from desktop (row2 classes would cause overlaps)
          Then tiles 1-4 each span 2 = 2 per row = 2 full rows.
          Tile 5 (last) is centered: col 2–3 in a 4-col grid. */
-      .categories__grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .cat-tile,
-      .cat-tile--row2-left,
-      .cat-tile--row2-right { grid-column: span 2; }
-      .cat-tile:last-child  { grid-column: 2 / span 2; }
+      .categories__bento { grid-template-columns: 1fr; }
+      .cat-featured__image { min-height: 200px; }
+      .cat-bottom-row { grid-template-columns: 1fr 1fr; }
 
-      /* Hero: 50/50 split at tablet (spec line 229) */
-      .hero__content    { flex: 0 0 50%; }
-      .hero__image-wrap { flex: 0 0 50%; }
+      /* Hero: stays 2-col at tablet */
+      .hero__grid { height: auto; min-height: 480px; }
 
-      /* Articles: 2 columns */
+      /* Products: 2 columns at tablet */
+      .products__grid { grid-template-columns: repeat(2, 1fr); }
+      .products__header { flex-direction: column; gap: 20px; }
+
+      /* Articles: 2 columns at tablet */
       .articles__grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ── RESPONSIVE: MOBILE (< 768px) ── */
     @media (max-width: 767px) {
 
-      /* Nav: logo + cart only */
-      .nav__links  { display: none; }
-      .nav__search { display: none; }
+      /* Nav: logo + icon buttons only */
+      .nav__links { display: none; }
 
-      /* Hero: remove 90vh min-height so section sizes to content */
-      .hero { min-height: auto; }
+      /* Hero: single column on mobile */
+      .hero__grid {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .hero__headline { font-size: 28px; }
+      .hero__text-wrap { padding: 28px 24px; }
 
-      /* Hero: stacked, image above text */
-      .hero__inner {
-        flex-direction: column-reverse;
-        min-height: auto;
-        padding: 40px 0;
-      }
-      .hero__content {
-        flex: none;
-        width: 100%;
-        padding: 32px 0 0;
-      }
-      .hero__headline { font-size: 32px; }
-      .hero__image-wrap {
-        flex: none;
-        width: 100%;
-        min-height: auto;
-      }
-      .hero__img-placeholder { aspect-ratio: 16 / 9; }
-
-      /* Categories: 2 columns, natural flow */
-      .categories__grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .cat-tile,
-      .cat-tile--row2-left,
-      .cat-tile--row2-right,
-      .cat-tile:last-child {
-        grid-column: span 1;
-      }
+      /* Categories: single column on mobile */
+      .categories__bento { grid-template-columns: 1fr; }
+      .cat-wide { flex-direction: column; }
+      .cat-wide__image { width: 100%; height: 160px; }
+      .cat-bottom-row { grid-template-columns: 1fr; }
 
       /* Products: 2 columns (already 2-col, stays) */
 
-      /* Articles: 1 column */
+      /* Products: 2 columns on mobile */
+      .products__grid { grid-template-columns: repeat(2, 1fr); }
+      .products__header { flex-direction: column; gap: 16px; }
+      .products__heading { font-size: 28px; }
+
+      /* Articles: 1 column on mobile */
       .articles__grid { grid-template-columns: 1fr; }
 
       /* Testimonials: 1 column */
@@ -551,13 +1038,15 @@
       .newsletter__form { flex-direction: column; }
       .newsletter__form .btn { width: 100%; }
 
-      /* Footer: stacked */
+      /* Footer: single column on mobile */
       .footer__top {
-        flex-direction: column;
+        grid-template-columns: 1fr 1fr;
         gap: 32px;
-        padding: 40px 0 24px;
+        padding: 48px 0 32px;
       }
-      .footer__links { gap: 32px; }
+      .footer__brand { grid-column: 1 / -1; }
+      .footer__bottom { flex-wrap: wrap; gap: 10px; }
+      .footer__badge { display: none; }
     }
 
   </style>
@@ -566,19 +1055,24 @@
 
   <!-- ── NAVIGATION ── -->
   <header class="nav">
-    <div class="container nav__inner">
-      <a href="#" class="nav__logo">FORMÉ</a>
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">monikers</a>
       <nav class="nav__links" aria-label="Main navigation">
-        <a href="#">Shop</a>
-        <a href="#">About</a>
+        <a href="#">All Product</a>
+        <a href="#">About Us</a>
+        <a href="#">FAQ</a>
         <a href="#">Blog</a>
+        <a href="#">Contact</a>
       </nav>
       <div class="nav__icons">
-        <button class="nav__icon-btn nav__search" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <button class="nav__icon-btn" aria-label="Wishlist">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
-        <button class="nav__icon-btn nav__cart" aria-label="Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <button class="nav__icon-btn" aria-label="Cart">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </button>
+        <button class="nav__icon-btn" aria-label="Profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </button>
       </div>
     </div>
@@ -586,47 +1080,148 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
-  <div class="container hero__inner">
-    <div class="hero__content">
-      <span class="tag">New Collection</span>
-      <h1 class="hero__headline">Designed<br>for daily life.</h1>
-      <a href="#" class="btn btn--primary">Shop Now</a>
+  <div class="hero__grid">
+
+    <!-- Left column -->
+    <div class="hero__left">
+
+      <!-- Top: Headline + CTA -->
+      <div class="hero__text-wrap">
+        <div>
+          <p class="hero__tag-label">Premium Collection 2026</p>
+          <h1 class="hero__headline">Elevate your lifestyle with premium essentials</h1>
+          <p class="hero__sub">Curated tech for modern living</p>
+        </div>
+        <div class="hero__cta">
+          <a href="#" class="btn-pill">Browse All Products</a>
+          <button class="btn-circle-dark" aria-label="Explore">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom: Wave Soap Dish card -->
+      <div class="hero__watch-card">
+        <div>
+          <p class="watch-card__label">Bathroom</p>
+          <p class="watch-card__name">Wave Soap Dish</p>
+          <p class="watch-card__sub">Ribbed wave design</p>
+          <p class="watch-card__price">USD 18.00</p>
+        </div>
+        <div class="watch-card__image">
+          <img src="images/product-soap-dish.jpg" alt="Wave Soap Dish — green ripple design" style="width:100%;height:100%;object-fit:cover;border-radius:14px;">
+        </div>
+      </div>
+
     </div>
-    <div class="hero__image-wrap">
-      <div class="hero__img-placeholder" role="img" aria-label="Hero product — 3D printed desk object"></div>
+
+    <!-- Right column: full-bleed image card -->
+    <div class="hero__headphones-card">
+      <img src="images/hero-desk-organizer.jpg" alt="3D printed desk organizers — phone stand and document holders">
+      <div class="featured-badge">Featured</div>
+      <div class="headphones-footer">
+        <div>
+          <p class="headphones-footer__name">Desk Organizer Set</p>
+          <p class="headphones-footer__sub">Phone stand + document holders</p>
+        </div>
+        <p class="headphones-footer__price">USD 36.00</p>
+      </div>
     </div>
+
   </div>
 </section>
 
 <!-- ── CATEGORIES ── -->
 <section class="categories">
   <div class="container">
-    <h2 class="section-heading">Browse by category</h2>
-    <div class="categories__grid">
 
-      <!-- Row 1 (3 tiles) -->
-      <a href="#" class="cat-tile">
-        <div class="cat-tile__img" role="img" aria-label="Desk Organizers — 3D printed objects"></div>
-        <span class="cat-tile__label">Desk Organizers</span>
-      </a>
-      <a href="#" class="cat-tile">
-        <div class="cat-tile__img" role="img" aria-label="Phone Stands — 3D printed objects"></div>
-        <span class="cat-tile__label">Phone Stands</span>
-      </a>
-      <a href="#" class="cat-tile">
-        <div class="cat-tile__img" role="img" aria-label="Cable Clips — 3D printed objects"></div>
-        <span class="cat-tile__label">Cable Clips</span>
+    <!-- Header -->
+    <div class="categories__header">
+      <h2 class="categories__title">Browse by categories</h2>
+      <p class="categories__subtitle">Explore our diverse range of categories tailored to meet your specific needs and interests.</p>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="categories__bento">
+
+      <!-- Left: large featured card -->
+      <a href="#" class="cat-featured">
+        <div class="cat-featured__image">
+          <img src="images/cat-multi-stand.webp" alt="All Products — desk organizer collection">
+        </div>
+        <p class="cat-featured__title">All Products</p>
+        <p class="cat-featured__desc">Discover endless possibilities with our All Products category. Shop now for everything you need in one convenient place.</p>
+        <div class="cat-featured__cta">
+          <button class="btn-pill">Browse All Products</button>
+          <button class="btn-arrow" aria-label="Browse all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+        </div>
       </a>
 
-      <!-- Row 2 (2 tiles, centered) -->
-      <a href="#" class="cat-tile cat-tile--row2-left">
-        <div class="cat-tile__img" role="img" aria-label="Planters — 3D printed objects"></div>
-        <span class="cat-tile__label">Planters</span>
-      </a>
-      <a href="#" class="cat-tile cat-tile--row2-right">
-        <div class="cat-tile__img" role="img" aria-label="Kitchen Tools — 3D printed objects"></div>
-        <span class="cat-tile__label">Kitchen Tools</span>
-      </a>
+      <!-- Right: stacked cards -->
+      <div class="cat-right">
+
+        <!-- Wide card -->
+        <a href="#" class="cat-wide">
+          <div class="cat-wide__text">
+            <p class="cat-wide__title">Organizers</p>
+            <p class="cat-wide__desc">Experience maximum efficiency and vibrant workspace with our Organizers.</p>
+            <div class="cat-wide__cta">
+              <button class="btn-view-more">View More</button>
+              <button class="btn-arrow" aria-label="View organizers">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="cat-wide__image">
+            <img src="images/cat-desk-organizer.jpg" alt="Organizers — multi-purpose desk organizer">
+          </div>
+        </a>
+
+        <!-- Bottom 2 cards -->
+        <div class="cat-bottom-row">
+
+          <a href="#" class="cat-small">
+            <div class="cat-small__image">
+              <img src="images/cat-wave-tray.jpg" alt="Trays — wave catch-all tray">
+            </div>
+            <div class="cat-small__footer">
+              <div>
+                <p class="cat-small__title">Trays</p>
+                <p class="cat-small__desc">Premium trays: Superior style, comfort, and function.</p>
+              </div>
+              <button class="btn-arrow" aria-label="View trays">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+          </a>
+
+          <a href="#" class="cat-small">
+            <div class="cat-small__image">
+              <img src="images/cat-calendar.jpg" alt="Calendars — wooden perpetual calendar">
+            </div>
+            <div class="cat-small__footer">
+              <div>
+                <p class="cat-small__title">Calendars</p>
+                <p class="cat-small__desc">Sleek calendars: Advanced design, performance, and style.</p>
+              </div>
+              <button class="btn-arrow" aria-label="View calendars">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+          </a>
+
+        </div>
+      </div>
 
     </div>
   </div>
@@ -635,39 +1230,91 @@
 <!-- ── FEATURED PRODUCTS ── -->
 <section class="products">
   <div class="container">
-    <h2 class="section-heading">Featured products</h2>
-    <p class="section-subtext">Trending this week</p>
+
+    <!-- 2-column header -->
+    <div class="products__header">
+      <h2 class="products__heading">Our most loved products for your daily essentials.</h2>
+      <div class="products__header-right">
+        <p class="products__desc">Handpicked favourites crafted for modern living — premium quality, thoughtful design, delivered to your door.</p>
+        <div class="products__cta">
+          <button class="btn-pill">View All Products</button>
+          <button class="btn-arrow" aria-label="View all products">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-column grid -->
     <div class="products__grid">
 
       <a href="#" class="product-card">
-        <div class="product-card__img" role="img" aria-label="Minimal Desk Tray"></div>
+        <div class="product-card__img-wrap">
+          <img src="images/product-utensil-holder.jpg" alt="Utensil Holder Set">
+        </div>
         <div class="product-card__info">
-          <span class="product-card__name">Minimal Desk Tray</span>
-          <span class="product-card__price">$24.00</span>
+          <div class="product-card__meta">
+            <p class="product-card__name">Utensil Holder Set</p>
+            <p class="product-card__price">$32.00</p>
+          </div>
+          <button class="btn-arrow-light" aria-label="View product">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
         </div>
       </a>
 
       <a href="#" class="product-card">
-        <div class="product-card__img" role="img" aria-label="Cable Clip Set"></div>
+        <div class="product-card__img-wrap">
+          <img src="images/product-soap-dish.jpg" alt="Wave Soap Dish">
+        </div>
         <div class="product-card__info">
-          <span class="product-card__name">Cable Clip Set</span>
-          <span class="product-card__price">$12.00</span>
+          <div class="product-card__meta">
+            <p class="product-card__name">Wave Soap Dish</p>
+            <p class="product-card__price">$18.00</p>
+          </div>
+          <button class="btn-arrow-light" aria-label="View product">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
         </div>
       </a>
 
       <a href="#" class="product-card">
-        <div class="product-card__img" role="img" aria-label="Phone Stand"></div>
+        <div class="product-card__img-wrap">
+          <img src="images/product-cat-vase.jpg" alt="Cat Planter Vase">
+        </div>
         <div class="product-card__info">
-          <span class="product-card__name">Phone Stand</span>
-          <span class="product-card__price">$18.00</span>
+          <div class="product-card__meta">
+            <p class="product-card__name">Cat Planter Vase</p>
+            <p class="product-card__price">$28.00</p>
+          </div>
+          <button class="btn-arrow-light" aria-label="View product">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
         </div>
       </a>
 
       <a href="#" class="product-card">
-        <div class="product-card__img" role="img" aria-label="Mini Planter"></div>
+        <div class="product-card__img-wrap">
+          <img src="images/product-twist-organizer.jpg" alt="Twist Organizer">
+        </div>
         <div class="product-card__info">
-          <span class="product-card__name">Mini Planter</span>
-          <span class="product-card__price">$16.00</span>
+          <div class="product-card__meta">
+            <p class="product-card__name">Twist Organizer</p>
+            <p class="product-card__price">$22.00</p>
+          </div>
+          <button class="btn-arrow-light" aria-label="View product">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
         </div>
       </a>
 
@@ -683,21 +1330,27 @@
     <div class="articles__grid">
 
       <article class="article-card">
-        <div class="article-card__img" role="img" aria-label="Article: How we design for daily use"></div>
+        <div class="article-card__img">
+          <img src="images/article-design.jpg" alt="How we design for daily use">
+        </div>
         <span class="tag article-card__tag">Design</span>
         <h3 class="article-card__title">How we design for daily use</h3>
         <a href="#" class="article-card__link">Read more →</a>
       </article>
 
       <article class="article-card">
-        <div class="article-card__img" role="img" aria-label="Article: The filaments we use &amp; why"></div>
+        <div class="article-card__img">
+          <img src="images/article-materials.jpg" alt="The filaments we use & why">
+        </div>
         <span class="tag article-card__tag">Materials</span>
         <h3 class="article-card__title">The filaments we use &amp; why</h3>
         <a href="#" class="article-card__link">Read more →</a>
       </article>
 
       <article class="article-card">
-        <div class="article-card__img" role="img" aria-label="Article: Organise your desk in 5 steps"></div>
+        <div class="article-card__img">
+          <img src="images/article-desk.jpg" alt="Organise your desk in 5 steps">
+        </div>
         <span class="tag article-card__tag">Ideas</span>
         <h3 class="article-card__title">Organise your desk in 5 steps</h3>
         <a href="#" class="article-card__link">Read more →</a>
@@ -769,38 +1422,85 @@
 
 <!-- ── FOOTER ── -->
 <footer class="footer">
-  <div class="container footer__top">
-    <div class="footer__brand">
-      <span class="footer__logo">FORMÉ</span>
-      <div class="footer__socials">
-        <a href="#" aria-label="Instagram" class="footer__social-link">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-        </a>
-        <a href="#" aria-label="Pinterest" class="footer__social-link">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-        </a>
-        <a href="#" aria-label="X (Twitter)" class="footer__social-link">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
+  <div class="container">
+    <div class="footer__top">
+
+      <!-- Brand column -->
+      <div class="footer__brand">
+        <a href="#" class="footer__logo">etec</a>
+        <p class="footer__tagline">Premium 3D printed essentials for modern living. Designed with care, built to last.</p>
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram" class="footer__social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="Pinterest" class="footer__social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </a>
+          <a href="#" aria-label="X (Twitter)" class="footer__social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok" class="footer__social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+          </a>
+        </div>
+        <div class="footer__contact">
+          <p>hello@etec.store</p>
+          <p>San Francisco, CA 94105</p>
+        </div>
       </div>
-    </div>
-    <div class="footer__links">
+
+      <!-- Shop -->
       <div class="footer__col">
         <span class="footer__col-heading">Shop</span>
         <a href="#">All Products</a>
-        <a href="#">Categories</a>
+        <a href="#">Desk Organizers</a>
+        <a href="#">Calendars</a>
+        <a href="#">Wall Shelves</a>
+        <a href="#">Trays &amp; Dishes</a>
         <a href="#">New In</a>
       </div>
+
+      <!-- Company -->
       <div class="footer__col">
-        <span class="footer__col-heading">Info</span>
-        <a href="#">About</a>
+        <span class="footer__col-heading">Company</span>
+        <a href="#">About Us</a>
         <a href="#">Blog</a>
-        <a href="#">Contact</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Sustainability</a>
       </div>
+
+      <!-- Support -->
+      <div class="footer__col">
+        <span class="footer__col-heading">Support</span>
+        <a href="#">FAQ</a>
+        <a href="#">Shipping Info</a>
+        <a href="#">Returns &amp; Refunds</a>
+        <a href="#">Track Order</a>
+        <a href="#">Contact Us</a>
+      </div>
+
+      <!-- Legal -->
+      <div class="footer__col">
+        <span class="footer__col-heading">Legal</span>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Accessibility</a>
+      </div>
+
     </div>
-  </div>
-  <div class="container footer__bottom">
-    <span>© 2026 Formé · All rights reserved</span>
+
+    <!-- Bottom bar -->
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2026 etec · All rights reserved</span>
+      <div class="footer__bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </div>
+      <span class="footer__badge">Designed &amp; 3D printed with care</span>
+    </div>
   </div>
 </footer>
 

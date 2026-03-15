@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formé — Layout Design</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #f5f5f5; color: #1a1a1a; }
+  .page-title { text-align: center; padding: 24px 20px 8px; font-size: 18px; font-weight: 600; color: #111; }
+  .page-subtitle { text-align: center; padding: 0 20px 20px; font-size: 13px; color: #888; }
+
+  .wireframe { max-width: 480px; margin: 0 auto 40px; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+  /* NAV */
+  .w-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #f0f0f0; }
+  .w-logo { font-size: 15px; font-weight: 700; letter-spacing: 2px; }
+  .w-nav-links { display: flex; gap: 14px; }
+  .w-nav-links span { font-size: 10px; color: #888; }
+  .w-nav-icons { display: flex; gap: 10px; }
+  .w-nav-icons span { font-size: 14px; }
+
+  /* HERO */
+  .w-hero { background: #fafafa; padding: 28px 20px; display: flex; align-items: center; justify-content: space-between; min-height: 160px; position: relative; }
+  .w-hero-text { flex: 1; }
+  .w-hero-tag { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #aaa; margin-bottom: 8px; }
+  .w-hero-title { font-size: 20px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+  .w-hero-cta { background: #2D2D2D; color: white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 11px; letter-spacing: 1px; cursor: pointer; }
+  .w-hero-img { width: 120px; height: 120px; background: #e8e8e8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #aaa; flex-shrink: 0; margin-left: 16px; }
+
+  /* SECTION LABEL */
+  .w-section { padding: 20px 20px 8px; }
+  .w-section-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .w-section-sub { font-size: 10px; color: #aaa; }
+
+  /* CATEGORIES */
+  .w-cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 20px 20px; }
+  .w-cat { background: #f5f5f5; border-radius: 8px; padding: 14px 8px; text-align: center; }
+  .w-cat-img { width: 36px; height: 36px; background: #e0e0e0; border-radius: 6px; margin: 0 auto 6px; }
+  .w-cat-label { font-size: 9px; color: #555; }
+
+  /* PRODUCTS */
+  .w-products { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 12px 20px 20px; }
+  .w-product { background: #f5f5f5; border-radius: 8px; overflow: hidden; }
+  .w-product-img { height: 80px; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #bbb; }
+  .w-product-info { padding: 8px 10px; }
+  .w-product-name { font-size: 10px; font-weight: 600; margin-bottom: 2px; }
+  .w-product-price { font-size: 10px; color: #2D2D2D; font-weight: 700; }
+
+  /* ARTICLES */
+  .w-articles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 20px 20px; }
+  .w-article { }
+  .w-article-img { height: 60px; background: #e0e0e0; border-radius: 6px; margin-bottom: 6px; }
+  .w-article-tag { font-size: 8px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+  .w-article-title { font-size: 9px; font-weight: 600; margin-top: 2px; line-height: 1.3; }
+
+  /* TESTIMONIALS */
+  .w-testimonials { padding: 12px 20px 20px; }
+  .w-testi-row { display: flex; gap: 10px; }
+  .w-testi { flex: 1; background: #f5f5f5; border-radius: 8px; padding: 10px; }
+  .w-testi-quote { font-size: 9px; color: #666; line-height: 1.4; margin-bottom: 8px; }
+  .w-testi-author { display: flex; align-items: center; gap: 6px; }
+  .w-testi-avatar { width: 20px; height: 20px; background: #d0d0d0; border-radius: 50%; }
+  .w-testi-name { font-size: 8px; font-weight: 600; }
+
+  /* NEWSLETTER */
+  .w-newsletter { background: #f5f5f5; margin: 0 20px 20px; border-radius: 10px; padding: 18px; text-align: center; }
+  .w-nl-title { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .w-nl-sub { font-size: 10px; color: #aaa; margin-bottom: 12px; }
+  .w-nl-form { display: flex; gap: 6px; }
+  .w-nl-input { flex: 1; background: white; border: 1px solid #e0e0e0; border-radius: 4px; padding: 7px 10px; font-size: 10px; }
+  .w-nl-btn { background: #2D2D2D; color: white; border: none; padding: 7px 14px; border-radius: 4px; font-size: 10px; cursor: pointer; }
+
+  /* FOOTER */
+  .w-footer { background: #1a1a1a; padding: 16px 20px; }
+  .w-footer-top { display: flex; justify-content: space-between; margin-bottom: 12px; }
+  .w-footer-logo { font-size: 13px; font-weight: 700; color: white; letter-spacing: 2px; }
+  .w-footer-cols { display: flex; gap: 24px; }
+  .w-footer-col span { display: block; font-size: 9px; color: #666; line-height: 1.8; }
+  .w-footer-col span:first-child { color: #888; font-weight: 600; margin-bottom: 2px; }
+  .w-footer-bottom { border-top: 1px solid #2a2a2a; padding-top: 10px; font-size: 9px; color: #555; }
+
+  .section-badge { display: inline-block; background: #2D2D2D; color: white; font-size: 8px; letter-spacing: 1px; padding: 2px 7px; border-radius: 3px; margin-bottom: 6px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<p class="page-title">Formé — Landing Page Layout</p>
+<p class="page-subtitle">Full page wireframe · Same structure as reference · Charcoal accent</p>
+
+<div class="wireframe">
+
+  <!-- NAV -->
+  <div class="w-nav">
+    <div class="w-logo">FORMÉ</div>
+    <div class="w-nav-links">
+      <span>Shop</span>
+      <span>About</span>
+      <span>Blog</span>
+    </div>
+    <div class="w-nav-icons">
+      <span>🔍</span>
+      <span>🛒</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="w-hero">
+    <div class="w-hero-text">
+      <div class="w-hero-tag">New Collection</div>
+      <div class="w-hero-title">Designed<br>for daily life.</div>
+      <button class="w-hero-cta">SHOP NOW</button>
+    </div>
+    <div class="w-hero-img">Hero Product</div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="w-section">
+    <div class="section-badge">Section 2</div>
+    <div class="w-section-title">Browse by category</div>
+  </div>
+  <div class="w-cats">
+    <div class="w-cat"><div class="w-cat-img"></div><div class="w-cat-label">Desk Organizers</div></div>
+    <div class="w-cat"><div class="w-cat-img"></div><div class="w-cat-label">Phone Stands</div></div>
+    <div class="w-cat"><div class="w-cat-img"></div><div class="w-cat-label">Cable Clips</div></div>
+    <div class="w-cat"><div class="w-cat-img"></div><div class="w-cat-label">Planters</div></div>
+    <div class="w-cat"><div class="w-cat-img"></div><div class="w-cat-label">Kitchen Tools</div></div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="w-section">
+    <div class="section-badge">Section 3</div>
+    <div class="w-section-title">Featured products</div>
+    <div class="w-section-sub">Trending this week</div>
+  </div>
+  <div class="w-products">
+    <div class="w-product"><div class="w-product-img">Image</div><div class="w-product-info"><div class="w-product-name">Minimal Desk Tray</div><div class="w-product-price">$24.00</div></div></div>
+    <div class="w-product"><div class="w-product-img">Image</div><div class="w-product-info"><div class="w-product-name">Cable Clip Set</div><div class="w-product-price">$12.00</div></div></div>
+    <div class="w-product"><div class="w-product-img">Image</div><div class="w-product-info"><div class="w-product-name">Phone Stand</div><div class="w-product-price">$18.00</div></div></div>
+    <div class="w-product"><div class="w-product-img">Image</div><div class="w-product-info"><div class="w-product-name">Mini Planter</div><div class="w-product-price">$16.00</div></div></div>
+  </div>
+
+  <!-- ARTICLES -->
+  <div class="w-section">
+    <div class="section-badge">Section 4</div>
+    <div class="w-section-title">Explore our articles</div>
+    <div class="w-section-sub">Tips, ideas & updates</div>
+  </div>
+  <div class="w-articles">
+    <div class="w-article"><div class="w-article-img"></div><div class="w-article-tag">Design</div><div class="w-article-title">How we design for daily use</div></div>
+    <div class="w-article"><div class="w-article-img"></div><div class="w-article-tag">Print</div><div class="w-article-title">Materials we use & why</div></div>
+    <div class="w-article"><div class="w-article-img"></div><div class="w-article-tag">Ideas</div><div class="w-article-title">Organise your desk in 5 steps</div></div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="w-section">
+    <div class="section-badge">Section 5</div>
+    <div class="w-section-title">What customers are saying</div>
+  </div>
+  <div class="w-testimonials">
+    <div class="w-testi-row">
+      <div class="w-testi">
+        <div class="w-testi-quote">"Beautifully crafted. Exactly what my desk needed."</div>
+        <div class="w-testi-author"><div class="w-testi-avatar"></div><div class="w-testi-name">Sarah K.</div></div>
+      </div>
+      <div class="w-testi">
+        <div class="w-testi-quote">"Fast shipping, perfect quality. Will order again."</div>
+        <div class="w-testi-author"><div class="w-testi-avatar"></div><div class="w-testi-name">James R.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="w-newsletter">
+    <div class="section-badge">Section 6</div>
+    <div class="w-nl-title">Subscribe & get 15% off</div>
+    <div class="w-nl-sub">Join the Formé community</div>
+    <div class="w-nl-form">
+      <div class="w-nl-input">your@email.com</div>
+      <button class="w-nl-btn">Subscribe</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="w-footer">
+    <div class="w-footer-top">
+      <div class="w-footer-logo">FORMÉ</div>
+      <div class="w-footer-cols">
+        <div class="w-footer-col">
+          <span>Shop</span>
+          <span>All Products</span>
+          <span>Categories</span>
+          <span>New In</span>
+        </div>
+        <div class="w-footer-col">
+          <span>Info</span>
+          <span>About</span>
+          <span>Blog</span>
+          <span>Contact</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-footer-bottom">© 2025 Formé · All rights reserved</div>
+  </div>
+
+</div>
+
+<p style="text-align:center; font-size: 12px; color: #aaa; padding: 0 20px 32px;">Does this layout look right? Let me know in the terminal.</p>
+
+</body>
+</html>
