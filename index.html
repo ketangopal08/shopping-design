@@ -186,13 +186,14 @@
       line-height: 1.15;
       letter-spacing: -0.5px;
       color: var(--color-text);
-      max-width: 340px;
+      max-width: 100%;
     }
     .hero__sub {
       font-size: 13px;
       color: var(--color-muted);
-      margin-top: 12px;
-      line-height: 1.5;
+      margin-top: 14px;
+      line-height: 1.65;
+      max-width: 360px;
     }
     .hero__cta {
       display: flex;
@@ -232,15 +233,16 @@
       transition: opacity 0.15s;
     }
     .btn-circle-dark:hover { opacity: 0.82; }
-    /* Bottom card: eWatch */
+    /* Bottom section: product preview — lives INSIDE the text card */
     .hero__watch-card {
-      background: #FFFFFF;
-      border-radius: 20px;
-      padding: 24px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
+      background: #F2F2F2;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-top: 28px;
     }
     .watch-card__label {
       font-size: 10px;
@@ -263,28 +265,25 @@
     }
     .watch-card__price { font-size: 14px; font-weight: 700; color: var(--color-text); }
     .watch-card__image {
-      width: 110px;
-      height: 90px;
-      background: #F0EFED;
+      width: 210px;
+      height: 185px;
+      background: #E8E8E8;
       border-radius: 14px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
     /* Right column: full-bleed image card */
     .hero__headphones-card {
       border-radius: 20px;
       overflow: hidden;
       position: relative;
+      background: #ebebeb center/cover no-repeat;
     }
     .hero__headphones-card img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      display: none;
     }
     .featured-badge {
       position: absolute;
@@ -312,6 +311,7 @@
       flex-shrink: 0;
     }
     .headphones-footer {
+      height: 110px;
       position: absolute;
       bottom: 0;
       left: 0;
@@ -336,7 +336,7 @@
     /* ── CATEGORIES (Bento layout) ── */
     .categories {
       background: var(--color-bg);
-      padding: 60px 0;
+      padding: 80px 0;
     }
 
     .categories__header {
@@ -425,6 +425,7 @@
       max-height: 280px;
       object-fit: contain;
       transition: transform 0.3s ease;
+      mix-blend-mode: multiply;
     }
     .cat-featured:hover .cat-featured__image img { transform: scale(1.03); }
 
@@ -561,7 +562,7 @@
     /* ── FEATURED PRODUCTS ── */
     .products {
       background: var(--color-bg);
-      padding: 60px 0;
+      padding: 80px 0;
     }
 
     /* 2-column header (same pattern as articles) */
@@ -676,7 +677,7 @@
     /* ── ARTICLES ── */
     .articles {
       background: var(--color-bg);
-      padding: 60px 0;
+      padding: 80px 0;
     }
     .articles .section-heading { margin-bottom: 0; }
     .articles .section-subtext  { margin-bottom: 32px; }
@@ -741,7 +742,7 @@
     /* ── TESTIMONIALS ── */
     .testimonials {
       background: var(--color-bg-alt);
-      padding: 60px 0;
+      padding: 80px 0;
     }
     .testimonials .section-heading { margin-bottom: 32px; }
     .testimonials__grid {
@@ -800,7 +801,7 @@
     /* ── NEWSLETTER ── */
     .newsletter {
       background: var(--color-bg-soft);
-      padding: 60px 0;
+      padding: 80px 0;
     }
     .newsletter__inner {
       max-width: 480px;
@@ -1085,12 +1086,12 @@
     <!-- Left column -->
     <div class="hero__left">
 
-      <!-- Top: Headline + CTA -->
+      <!-- Single unified card: Headline + CTA + product preview -->
       <div class="hero__text-wrap">
         <div>
           <p class="hero__tag-label">Premium Collection 2026</p>
-          <h1 class="hero__headline">Elevate your lifestyle with premium essentials</h1>
-          <p class="hero__sub">Curated tech for modern living</p>
+          <h1 class="hero__headline">Elevate your lifestyle with premium essentials.</h1>
+          <p class="hero__sub">Elevate your routine with premium goods and curated essentials, combining quality and style to enhance comfort, convenience, and sophistication in every moment of your day.</p>
         </div>
         <div class="hero__cta">
           <a href="#" class="btn-pill">Browse All Products</a>
@@ -1098,31 +1099,31 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
         </div>
-      </div>
 
-      <!-- Bottom: Wave Soap Dish card -->
-      <div class="hero__watch-card">
-        <div>
-          <p class="watch-card__label">Bathroom</p>
-          <p class="watch-card__name">Wave Soap Dish</p>
-          <p class="watch-card__sub">Ribbed wave design</p>
-          <p class="watch-card__price">USD 18.00</p>
-        </div>
-        <div class="watch-card__image">
-          <img src="images/product-soap-dish.jpg" alt="Wave Soap Dish — green ripple design" style="width:100%;height:100%;object-fit:cover;border-radius:14px;">
+        <!-- Product preview inside same card -->
+        <div class="hero__watch-card">
+          <div>
+            <p class="watch-card__label">Featured</p>
+            <p class="watch-card__name">Mind Meditation Device</p>
+            <p class="watch-card__sub">Personal calm wearable</p>
+            <p class="watch-card__price">USD 89.00</p>
+          </div>
+          <div class="watch-card__image">
+            <img src="images/Never Give Up - James Min.jpeg" alt="Mind personal meditation wearable — terracotta wrist device with calm smiley display" style="width:100%;height:100%;object-fit:cover;border-radius:14px;">
+          </div>
         </div>
       </div>
 
     </div>
 
     <!-- Right column: full-bleed image card -->
-    <div class="hero__headphones-card">
-      <img src="images/hero-desk-organizer.jpg" alt="3D printed desk organizers — phone stand and document holders">
+    <div class="hero__headphones-card" style="background-image: url('images/08156a066426a2b488b7612aaad99549.jpg');">
+      <img src="images/08156a066426a2b488b7612aaad99549.jpg" alt="Compact smart camera device with screen, dial and colorful buttons">
       <div class="featured-badge">Featured</div>
       <div class="headphones-footer">
         <div>
-          <p class="headphones-footer__name">Desk Organizer Set</p>
-          <p class="headphones-footer__sub">Phone stand + document holders</p>
+          <p class="headphones-footer__name">Pocket Smart Camera</p>
+          <p class="headphones-footer__sub">AI-powered · compact design</p>
         </div>
         <p class="headphones-footer__price">USD 36.00</p>
       </div>
@@ -1147,7 +1148,7 @@
       <!-- Left: large featured card -->
       <a href="#" class="cat-featured">
         <div class="cat-featured__image">
-          <img src="images/cat-multi-stand.webp" alt="All Products — desk organizer collection">
+          <img src="images/_ (3).jpeg" alt="All Products — lamp collection">
         </div>
         <p class="cat-featured__title">All Products</p>
         <p class="cat-featured__desc">Discover endless possibilities with our All Products category. Shop now for everything you need in one convenient place.</p>
