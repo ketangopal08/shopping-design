@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formé — Designed for daily life</title>
+  <title>CraftWave — Designed for daily life</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
   <style>
 
     /* ── TOKENS ── */
@@ -24,6 +24,7 @@
       --color-error:       #D32F2F;
 
       --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-description: 'DM Sans', system-ui, -apple-system, sans-serif;
       --container-max: 1200px;
       --container-pad: 24px;
     }
@@ -55,6 +56,17 @@
       max-width: var(--container-max);
       margin: 0 auto;
       padding: 0 var(--container-pad);
+    }
+
+    /* ── DESCRIPTION FONT (DM Sans) ── */
+    .hero__sub,
+    .section-subtext,
+    .watch-card__sub,
+    .headphones-footer__sub,
+    .product-card__name,
+    .article-card__title,
+    .testimonial-card__body {
+      font-family: var(--font-description);
     }
 
     /* ── SHARED SECTION HEADING ── */
@@ -148,7 +160,7 @@
 
     /* ── HERO (etec card layout) ── */
     .hero {
-      background: #F2F2F2;
+      background: #ffffff;
       padding: 40px;
     }
     .hero__grid {
@@ -166,7 +178,7 @@
     /* Top card: headline + CTA */
     .hero__text-wrap {
       flex: 1;
-      background: #FFFFFF;
+      background: #f7f7f7;
       border-radius: 20px;
       padding: 40px 36px;
       display: flex;
@@ -198,7 +210,7 @@
     .hero__cta {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 3px;
       margin-top: 32px;
     }
     .btn-pill {
@@ -208,7 +220,7 @@
       color: #fff;
       font-family: var(--font-base);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: 0.2px;
       border: none;
       border-radius: 100px;
@@ -239,7 +251,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      background: #F2F2F2;
+      background: #ffffff;
       border-radius: 16px;
       padding: 16px 20px;
       margin-top: 28px;
@@ -253,17 +265,17 @@
       margin-bottom: 6px;
     }
     .watch-card__name {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 500;
       color: var(--color-text);
       margin-bottom: 4px;
     }
     .watch-card__sub {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--color-muted);
       margin-bottom: 12px;
     }
-    .watch-card__price { font-size: 14px; font-weight: 700; color: var(--color-text); }
+    .watch-card__price { font-size: 16px; font-weight: 600; color: var(--color-text); }
     .watch-card__image {
       width: 210px;
       height: 185px;
@@ -311,7 +323,7 @@
       flex-shrink: 0;
     }
     .headphones-footer {
-      height: 110px;
+      height: 120px;
       position: absolute;
       bottom: 0;
       left: 0;
@@ -328,8 +340,8 @@
       border-radius: 0 0 20px 20px;
       z-index: 2;
     }
-    .headphones-footer__name { font-size: 15px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
-    .headphones-footer__sub  { font-size: 12px; color: #666666; }
+    .headphones-footer__name { font-size: 20px; font-weight: 500; color: #1A1A1A; margin-bottom: 2px; }
+    .headphones-footer__sub  { font-size: 13px; color: #666666; }
     .headphones-footer__price { font-size: 15px; font-weight: 700; color: #1A1A1A; white-space: nowrap; }
 
     /* ── CATEGORIES ── */
@@ -489,7 +501,7 @@
       gap: 8px;
     }
     .cat-wide__image {
-      width: 160px;
+      width: 201;
       height: 140px;
       flex-shrink: 0;
       display: flex;
@@ -497,8 +509,7 @@
       justify-content: center;
     }
     .cat-wide__image img {
-      max-width: 100%;
-      max-height: 140px;
+      max-height: 206px;
       object-fit: contain;
       transition: transform 0.3s ease;
     }
@@ -689,7 +700,7 @@
     .article-card { display: flex; flex-direction: column; }
     .article-card__img {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 3 / 4;
       background: #E8E8E8;
       border-radius: 10px;
       overflow: hidden;
@@ -784,6 +795,7 @@
       border-radius: 50%;
       background: var(--color-placeholder);
       flex-shrink: 0;
+      object-fit: cover;
     }
     .testimonial-card__meta {
       display: flex;
@@ -800,21 +812,33 @@
 
     /* ── NEWSLETTER ── */
     .newsletter {
-      background: var(--color-bg-soft);
+      background: #141414;
       padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
     .newsletter__inner {
       max-width: 480px;
       margin: 0 auto;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     .newsletter__heading {
       font-size: 28px;
       font-weight: 700;
+      color: #ffffff;
     }
     .newsletter__subtext {
       font-size: 14px;
-      color: var(--color-muted);
+      color: rgba(255,255,255,0.55);
       margin-top: 8px;
       margin-bottom: 24px;
     }
@@ -827,15 +851,18 @@
     .newsletter__form .btn { padding: 12px 24px; }
     .newsletter__input {
       flex: 1;
-      border: 1px solid #DDDDDD;
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 4px;
       padding: 12px 16px;
       font-size: 13px;
       font-family: var(--font-base);
       transition: border-color 0.2s;
+      background: rgba(255,255,255,0.07);
+      color: #ffffff;
     }
-    .newsletter__input:focus { border-color: var(--color-accent); }
-    .newsletter__input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    .newsletter__input::placeholder { color: rgba(255,255,255,0.4); }
+    .newsletter__input:focus { border-color: rgba(255,255,255,0.5); }
+    .newsletter__input:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 2px; }
     .newsletter__input.input--error { border-color: var(--color-error); }
     .newsletter__error {
       font-size: 12px;
@@ -846,7 +873,7 @@
     }
     .newsletter__success {
       font-size: 14px;
-      color: #2D2D2D;
+      color: rgba(255,255,255,0.85);
       text-align: center;
     }
 
@@ -1057,7 +1084,7 @@
   <!-- ── NAVIGATION ── -->
   <header class="nav">
     <div class="nav__inner">
-      <a href="#" class="nav__logo">monikers</a>
+      <a href="#" class="nav__logo">CraftWave.</a>
       <nav class="nav__links" aria-label="Main navigation">
         <a href="#">All Product</a>
         <a href="#">About Us</a>
@@ -1096,7 +1123,7 @@
         <div class="hero__cta">
           <a href="#" class="btn-pill">Browse All Products</a>
           <button class="btn-circle-dark" aria-label="Explore">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <svg fill="#000000" width="16px" height="16px" viewBox="0 0 24 24" id="up-right" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><line id="primary" x1="18.36" y1="5.64" x2="5" y2="19" style="fill: none; stroke: rgb(255, 255, 255); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></line><polyline id="primary-2" data-name="primary" points="9 5 19 5 19 14.9" style="fill: none; stroke: rgb(255, 255, 255); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></polyline></svg>
           </button>
         </div>
 
@@ -1104,12 +1131,12 @@
         <div class="hero__watch-card">
           <div>
             <p class="watch-card__label">Featured</p>
-            <p class="watch-card__name">Mind Meditation Device</p>
-            <p class="watch-card__sub">Personal calm wearable</p>
-            <p class="watch-card__price">USD 89.00</p>
+            <p class="watch-card__name">Handcrafted wooden table lamps</p>
+            <p class="watch-card__sub">Handcrafted wooden table lamps with Edison bulbs.</p>
+            <p class="watch-card__price">₹450.00</p>
           </div>
           <div class="watch-card__image">
-            <img src="images/Never Give Up - James Min.jpeg" alt="Mind personal meditation wearable — terracotta wrist device with calm smiley display" style="width:100%;height:100%;object-fit:cover;border-radius:14px;">
+            <img src="images/Pozharsky - Etsy.jpeg" alt="Mind personal meditation wearable — terracotta wrist device with calm smiley display" style="width:100%;height:100%;object-fit:cover;border-radius:14px;">
           </div>
         </div>
       </div>
@@ -1123,9 +1150,9 @@
       <div class="headphones-footer">
         <div>
           <p class="headphones-footer__name">Pocket Smart Camera</p>
-          <p class="headphones-footer__sub">AI-powered · compact design</p>
+          <p class="headphones-footer__sub">Step into comfort with our Classic Blue Denim Jeans,<br> a wardrobe staple combining timeless appeal and modern fit.</p>
         </div>
-        <p class="headphones-footer__price">USD 36.00</p>
+        <p class="headphones-footer__price">₹1299.00</p>
       </div>
     </div>
 
@@ -1148,7 +1175,7 @@
       <!-- Left: large featured card -->
       <a href="#" class="cat-featured">
         <div class="cat-featured__image">
-          <img src="images/_ (3).jpeg" alt="All Products — lamp collection">
+          <img src="images/b1.png" style="height: 300px !important;" alt="All Products — lamp collection">
         </div>
         <p class="cat-featured__title">All Products</p>
         <p class="cat-featured__desc">Discover endless possibilities with our All Products category. Shop now for everything you need in one convenient place.</p>
@@ -1180,7 +1207,7 @@
             </div>
           </div>
           <div class="cat-wide__image">
-            <img src="images/cat-desk-organizer.jpg" alt="Organizers — multi-purpose desk organizer">
+            <img src="images/b3.png" alt="Organizers — multi-purpose desk organizer">
           </div>
         </a>
 
@@ -1189,7 +1216,7 @@
 
           <a href="#" class="cat-small">
             <div class="cat-small__image">
-              <img src="images/cat-wave-tray.jpg" alt="Trays — wave catch-all tray">
+              <img src="images/b6.png" alt="Trays — wave catch-all tray">
             </div>
             <div class="cat-small__footer">
               <div>
@@ -1206,7 +1233,7 @@
 
           <a href="#" class="cat-small">
             <div class="cat-small__image">
-              <img src="images/cat-calendar.jpg" alt="Calendars — wooden perpetual calendar">
+              <img src="images/b5.png" alt="Calendars — wooden perpetual calendar">
             </div>
             <div class="cat-small__footer">
               <div>
@@ -1258,7 +1285,7 @@
         <div class="product-card__info">
           <div class="product-card__meta">
             <p class="product-card__name">Utensil Holder Set</p>
-            <p class="product-card__price">$32.00</p>
+            <p class="product-card__price">₹32.00</p>
           </div>
           <button class="btn-arrow-light" aria-label="View product">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1275,7 +1302,7 @@
         <div class="product-card__info">
           <div class="product-card__meta">
             <p class="product-card__name">Wave Soap Dish</p>
-            <p class="product-card__price">$18.00</p>
+            <p class="product-card__price">₹18.00</p>
           </div>
           <button class="btn-arrow-light" aria-label="View product">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1292,7 +1319,7 @@
         <div class="product-card__info">
           <div class="product-card__meta">
             <p class="product-card__name">Cat Planter Vase</p>
-            <p class="product-card__price">$28.00</p>
+            <p class="product-card__price">₹28.00</p>
           </div>
           <button class="btn-arrow-light" aria-label="View product">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1309,7 +1336,7 @@
         <div class="product-card__info">
           <div class="product-card__meta">
             <p class="product-card__name">Twist Organizer</p>
-            <p class="product-card__price">$22.00</p>
+            <p class="product-card__price">₹22.00</p>
           </div>
           <button class="btn-arrow-light" aria-label="View product">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1332,28 +1359,28 @@
 
       <article class="article-card">
         <div class="article-card__img">
-          <img src="images/article-design.jpg" alt="How we design for daily use">
+          <img src="images/IMG_5385.JPG.jpeg" alt="From sketch to prototype — our design process">
         </div>
         <span class="tag article-card__tag">Design</span>
-        <h3 class="article-card__title">How we design for daily use</h3>
+        <h3 class="article-card__title">From sketch to prototype — our design process</h3>
         <a href="#" class="article-card__link">Read more →</a>
       </article>
 
       <article class="article-card">
         <div class="article-card__img">
-          <img src="images/article-materials.jpg" alt="The filaments we use & why">
+          <img src="images/IMG_5386.JPG.jpeg" alt="Inside the lab: how we build & test">
         </div>
-        <span class="tag article-card__tag">Materials</span>
-        <h3 class="article-card__title">The filaments we use &amp; why</h3>
+        <span class="tag article-card__tag">Process</span>
+        <h3 class="article-card__title">Inside the lab: how we build &amp; test</h3>
         <a href="#" class="article-card__link">Read more →</a>
       </article>
 
       <article class="article-card">
         <div class="article-card__img">
-          <img src="images/article-desk.jpg" alt="Organise your desk in 5 steps">
+          <img src="images/44ad359dfe5b1fc47e122bc32295f881.jpg" alt="Cultural Fusion — designing across traditions">
         </div>
-        <span class="tag article-card__tag">Ideas</span>
-        <h3 class="article-card__title">Organise your desk in 5 steps</h3>
+        <span class="tag article-card__tag">Culture</span>
+        <h3 class="article-card__title">Cultural Fusion — designing across traditions</h3>
         <a href="#" class="article-card__link">Read more →</a>
       </article>
 
@@ -1371,7 +1398,7 @@
         <div class="testimonial-card__quote-mark">&ldquo;</div>
         <p class="testimonial-card__text">Beautifully crafted. Exactly what my desk needed.</p>
         <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar" role="img" aria-label="Sarah K.'s avatar"></div>
+          <img class="testimonial-card__avatar" src="https://i.pravatar.cc/72?img=47" alt="Sarah K.'s avatar">
           <div class="testimonial-card__meta">
             <span class="testimonial-card__name">Sarah K.</span>
             <span class="testimonial-card__handle">@sarahk</span>
@@ -1384,7 +1411,7 @@
         <div class="testimonial-card__quote-mark">&ldquo;</div>
         <p class="testimonial-card__text">Fast shipping, perfect quality. Will order again.</p>
         <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar" role="img" aria-label="James R.'s avatar"></div>
+          <img class="testimonial-card__avatar" src="https://i.pravatar.cc/72?img=12" alt="James R.'s avatar">
           <div class="testimonial-card__meta">
             <span class="testimonial-card__name">James R.</span>
             <span class="testimonial-card__handle">@james_r</span>
@@ -1399,6 +1426,48 @@
 
 <!-- ── NEWSLETTER ── -->
 <section class="newsletter">
+  <svg class="newsletter__bg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <filter id="topo-distort" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="turbulence" baseFrequency="0.008 0.012" numOctaves="3" seed="8" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="85" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+    <g filter="url(#topo-distort)" stroke="#282828" fill="none" stroke-width="1">
+      <line x1="-200" y1="-80" x2="1640" y2="-80"/>
+      <line x1="-200" y1="-62" x2="1640" y2="-62"/>
+      <line x1="-200" y1="-44" x2="1640" y2="-44"/>
+      <line x1="-200" y1="-26" x2="1640" y2="-26"/>
+      <line x1="-200" y1="-8"  x2="1640" y2="-8"/>
+      <line x1="-200" y1="10"  x2="1640" y2="10"/>
+      <line x1="-200" y1="28"  x2="1640" y2="28"/>
+      <line x1="-200" y1="46"  x2="1640" y2="46"/>
+      <line x1="-200" y1="64"  x2="1640" y2="64"/>
+      <line x1="-200" y1="82"  x2="1640" y2="82"/>
+      <line x1="-200" y1="100" x2="1640" y2="100"/>
+      <line x1="-200" y1="118" x2="1640" y2="118"/>
+      <line x1="-200" y1="136" x2="1640" y2="136"/>
+      <line x1="-200" y1="154" x2="1640" y2="154"/>
+      <line x1="-200" y1="172" x2="1640" y2="172"/>
+      <line x1="-200" y1="190" x2="1640" y2="190"/>
+      <line x1="-200" y1="208" x2="1640" y2="208"/>
+      <line x1="-200" y1="226" x2="1640" y2="226"/>
+      <line x1="-200" y1="244" x2="1640" y2="244"/>
+      <line x1="-200" y1="262" x2="1640" y2="262"/>
+      <line x1="-200" y1="280" x2="1640" y2="280"/>
+      <line x1="-200" y1="298" x2="1640" y2="298"/>
+      <line x1="-200" y1="316" x2="1640" y2="316"/>
+      <line x1="-200" y1="334" x2="1640" y2="334"/>
+      <line x1="-200" y1="352" x2="1640" y2="352"/>
+      <line x1="-200" y1="370" x2="1640" y2="370"/>
+      <line x1="-200" y1="388" x2="1640" y2="388"/>
+      <line x1="-200" y1="406" x2="1640" y2="406"/>
+      <line x1="-200" y1="424" x2="1640" y2="424"/>
+      <line x1="-200" y1="442" x2="1640" y2="442"/>
+      <line x1="-200" y1="460" x2="1640" y2="460"/>
+      <line x1="-200" y1="478" x2="1640" y2="478"/>
+    </g>
+  </svg>
   <div class="container">
     <div class="newsletter__inner">
       <h2 class="newsletter__heading">Subscribe &amp; get 15% off</h2>
@@ -1428,7 +1497,7 @@
 
       <!-- Brand column -->
       <div class="footer__brand">
-        <a href="#" class="footer__logo">etec</a>
+        <a href="#" class="footer__logo">CraftWave.</a>
         <p class="footer__tagline">Premium 3D printed essentials for modern living. Designed with care, built to last.</p>
         <div class="footer__socials">
           <a href="#" aria-label="Instagram" class="footer__social-link">
