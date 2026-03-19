@@ -107,7 +107,7 @@
       top: 0;
       z-index: 100;
       height: 64px;
-      background: rgba(242, 242, 242, 0.6);
+      background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.4);
@@ -147,7 +147,7 @@
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      background: #E8E8E8;
+      /* background: #E8E8E8; */
       border: none;
       cursor: pointer;
       display: flex;
@@ -193,19 +193,19 @@
       margin-bottom: 16px;
     }
     .hero__headline {
-      font-size: clamp(26px, 3vw, 42px);
-      font-weight: 700;
+      font-size: 44px;
+      font-weight: 500;
       line-height: 1.15;
       letter-spacing: -0.5px;
       color: var(--color-text);
       max-width: 100%;
     }
     .hero__sub {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--color-muted);
       margin-top: 14px;
       line-height: 1.65;
-      max-width: 360px;
+      max-width: 600px;
     }
     .hero__cta {
       display: flex;
@@ -275,7 +275,7 @@
       color: var(--color-muted);
       margin-bottom: 12px;
     }
-    .watch-card__price { font-size: 16px; font-weight: 600; color: var(--color-text); }
+    .watch-card__price { font-size: 16px; font-weight: 500; color: var(--color-text); }
     .watch-card__image {
       width: 210px;
       height: 185px;
@@ -342,7 +342,7 @@
     }
     .headphones-footer__name { font-size: 20px; font-weight: 500; color: #1A1A1A; margin-bottom: 2px; }
     .headphones-footer__sub  { font-size: 13px; color: #666666; }
-    .headphones-footer__price { font-size: 15px; font-weight: 700; color: #1A1A1A; white-space: nowrap; }
+    .headphones-footer__price { font-size: 16px; font-weight: 500; color: #1A1A1A; white-space: nowrap; }
 
     /* ── CATEGORIES ── */
     /* ── CATEGORIES (Bento layout) ── */
@@ -358,7 +358,7 @@
 
     .categories__title {
       font-size: clamp(28px, 3vw, 42px);
-      font-weight: 700;
+      font-weight: 500;
       color: var(--color-text);
       letter-spacing: -0.5px;
       margin-bottom: 12px;
@@ -587,7 +587,7 @@
 
     .products__heading {
       font-size: clamp(28px, 3.2vw, 46px);
-      font-weight: 700;
+      font-weight: 500;
       line-height: 1.2;
       letter-spacing: -0.5px;
       color: var(--color-text);
@@ -1084,7 +1084,7 @@
   <!-- ── NAVIGATION ── -->
   <header class="nav">
     <div class="nav__inner">
-      <a href="#" class="nav__logo">CraftWave.</a>
+      <a href="#" class="nav__logo">Craft<img src="images/wave.png" style="height: 14px;display: inline-block;margin-left: 2px;" alt="CraftWave Logo" class="nav__logo-img"></a>
       <nav class="nav__links" aria-label="Main navigation">
         <a href="#">All Product</a>
         <a href="#">About Us</a>
@@ -1116,7 +1116,7 @@
       <!-- Single unified card: Headline + CTA + product preview -->
       <div class="hero__text-wrap">
         <div>
-          <p class="hero__tag-label">Premium Collection 2026</p>
+          <!-- <p class="hero__tag-label">Premium Collection 2026</p> -->
           <h1 class="hero__headline">Elevate your lifestyle with premium essentials.</h1>
           <p class="hero__sub">Elevate your routine with premium goods and curated essentials, combining quality and style to enhance comfort, convenience, and sophistication in every moment of your day.</p>
         </div>
@@ -1353,8 +1353,11 @@
 <!-- ── ARTICLES ── -->
 <section class="articles">
   <div class="container">
-    <h2 class="section-heading">Explore our articles</h2>
-    <p class="section-subtext">Tips, ideas &amp; updates</p>
+      <div class="categories__header" style="text-align: left !important;">
+      <h2 class="categories__title">Explore our articles</h2>
+      <p class="categories__subtitle" style="text-align: left !important;margin: unset !important;">Handpicked favourites crafted for modern living — premium quality, thoughtful design, delivered to your door.</p>
+    </div>
+
     <div class="articles__grid">
 
       <article class="article-card">
@@ -1391,7 +1394,11 @@
 <!-- ── TESTIMONIALS ── -->
 <section class="testimonials">
   <div class="container">
-    <h2 class="section-heading">What customers are saying</h2>
+      <div class="categories__header" style="text-align: left !important;">
+      <h2 class="categories__title">What customers are saying</h2>
+      <p class="categories__subtitle" style="text-align: left !important;margin: unset !important;">Handpicked favourites crafted for modern living — premium quality, thoughtful design, delivered to your door.</p>
+    </div>
+    
     <div class="testimonials__grid">
 
       <div class="testimonial-card">
