@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products — CraftWave</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ── TOKENS ── */
+    :root {
+      --color-accent:      #1A1A1A;
+      --color-bg:          #FFFFFF;
+      --color-bg-soft:     #F5F5F5;
+      --color-text:        #1A1A1A;
+      --color-muted:       #888888;
+      --color-border:      #EBEBEB;
+      --badge-new:         #22C55E;
+      --badge-hot:         #EF4444;
+      --font-base:         'Inter', system-ui, sans-serif;
+      --font-desc:         'DM Sans', system-ui, sans-serif;
+      --radius-card:       20px;
+      --radius-pill:       100px;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-base);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── PRIMARY NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 32px;
+    }
+    .nav__logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--color-text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav__links {
+      display: flex;
+      gap: 32px;
+    }
+    .nav__links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav__links a:hover,
+    .nav__links a.active { color: var(--color-text); }
+    .nav__icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav__icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text);
+      background: none;
+      transition: background 0.15s;
+    }
+    .nav__icon-btn:hover { background: var(--color-border); }
+
+    /* ── SECONDARY FILTER BAR (inside container) ── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--color-bg-soft);
+      border-radius: 100px;
+      padding: 6px 8px 6px 8px;
+      margin-bottom: 40px;
+    }
+
+    /* Filter pills */
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
+    .filter-pill:hover {
+      background: var(--color-bg-soft);
+      color: var(--color-text);
+    }
+    .filter-pill.active {
+      background: var(--color-text);
+      color: #fff;
+    }
+
+    /* Search bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 7px 16px;
+      background: var(--color-bg);
+      min-width: 180px;
+      max-width: 240px;
+    }
+    .search-bar svg {
+      color: var(--color-muted);
+      flex-shrink: 0;
+    }
+    .search-bar input {
+      border: none;
+      background: none;
+      font-family: var(--font-base);
+      font-size: 13px;
+      color: var(--color-text);
+      outline: none;
+      width: 100%;
+    }
+    .search-bar input::placeholder {
+      color: var(--color-muted);
+    }
+
+    /* ── MAIN WRAPPER ── */
+    .main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 36px;
+    }
+    .section-header__left {}
+    .section-header__title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--color-text);
+      line-height: 1.1;
+    }
+    .section-header__sub {
+      font-family: var(--font-desc);
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-top: 10px;
+      max-width: 340px;
+      line-height: 1.6;
+    }
+    .section-header__arrows {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .arrow-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text);
+      transition: background 0.18s, border-color 0.18s, transform 0.15s;
+    }
+    .arrow-btn:hover {
+      background: var(--color-bg-soft);
+      transform: scale(1.05);
+    }
+    .arrow-btn.active,
+    .arrow-btn--filled {
+      background: var(--color-text);
+      color: #fff;
+      border-color: var(--color-text);
+    }
+    .arrow-btn--filled:hover {
+      opacity: 0.85;
+    }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+    }
+
+    /* Image area */
+    .product-card__image-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      overflow: hidden;
+    }
+    .product-card__image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-card__image-wrap img {
+      transform: scale(1.05);
+    }
+
+    /* Badges */
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.2px;
+    }
+    .badge--new { background: var(--badge-new); }
+    .badge--hot { background: var(--badge-hot); }
+    .badge--featured {
+      background: transparent;
+      color: var(--color-muted);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 0;
+    }
+
+    /* Star rating */
+    .card-rating {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .card-rating svg {
+      color: #F59E0B;
+    }
+
+    /* Card footer */
+    .product-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px 18px;
+      background: var(--color-bg-soft);
+    }
+    .product-card__info {}
+    .product-card__name {
+      font-family: var(--font-desc);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+    .product-card__price {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: -0.2px;
+    }
+
+    /* Arrow link button */
+    .card-link-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .card-link-btn:hover {
+      background: var(--color-text);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-header__title { font-size: 26px; }
+    }
+    @media (max-width: 600px) {
+      .top-nav { padding: 0 16px; }
+      .main { padding: 32px 16px 60px; }
+      .product-grid { grid-template-columns: 1fr; gap: 12px; }
+      .filter-pills { gap: 6px; }
+      .filter-pill { padding: 6px 12px; font-size: 12px; }
+    }
+
+    /* ── FADE IN ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .product-card {
+      animation: fadeUp 0.4s ease both;
+    }
+    .product-card:nth-child(1) { animation-delay: 0.04s; }
+    .product-card:nth-child(2) { animation-delay: 0.09s; }
+    .product-card:nth-child(3) { animation-delay: 0.14s; }
+    .product-card:nth-child(4) { animation-delay: 0.19s; }
+    .product-card:nth-child(5) { animation-delay: 0.24s; }
+    .product-card:nth-child(6) { animation-delay: 0.29s; }
+    .product-card:nth-child(7) { animation-delay: 0.34s; }
+    .product-card:nth-child(8) { animation-delay: 0.39s; }
+    .product-card:nth-child(9) { animation-delay: 0.44s; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── PRIMARY NAV ── -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        Craft<img src="images/wave.png" style="height:14px;display:inline-block;margin-left:2px;" alt="">
+      </a>
+      <nav class="nav__links">
+        <a href="product.html" class="active">All Products</a>
+        <a href="#">About Us</a>
+        <a href="#">FAQ</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="nav__icons">
+        <button class="nav__icon-btn" aria-label="Wishlist">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="nav__icon-btn" aria-label="Cart">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </button>
+        <button class="nav__icon-btn" aria-label="Profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- ── FILTER BAR ── -->
+    <div class="filter-bar">
+      <div class="filter-pills">
+        <button class="filter-pill active" onclick="filterProducts(this, 'all')">All Product</button>
+        <button class="filter-pill" onclick="filterProducts(this, 'organizer')">Organizers</button>
+        <button class="filter-pill" onclick="filterProducts(this, 'decor')">Decor</button>
+        <button class="filter-pill" onclick="filterProducts(this, 'lamp')">Lamps</button>
+        <button class="filter-pill" onclick="filterProducts(this, 'kitchen')">Kitchen</button>
+      </div>
+      <div class="search-bar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" placeholder="Search..." id="searchInput" oninput="searchProducts()">
+      </div>
+    </div>
+
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="section-header__left">
+        <h1 class="section-header__title">Key Features of This Item</h1>
+        <p class="section-header__sub">Explore the standout features of this product, designed to offer exceptional quality, performance, and value for your needs.</p>
+      </div>
+      <div class="section-header__arrows">
+        <button class="arrow-btn" onclick="prevPage()" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="arrow-btn arrow-btn--filled" onclick="nextPage()" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="productGrid">
+
+      <!-- Card 1 -->
+      <div class="product-card" data-id="1" data-category="organizer" data-name="Desk Organizer Set">
+        <div class="product-card__image-wrap">
+          <span class="badge badge--new">New</span>
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/hero-desk-organizer.jpg" alt="Desk Organizer Set">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Desk Organizer Set</p>
+            <p class="product-card__price">USD 49.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="product-card" data-category="decor" data-name="Cat Vase Sculpture">
+        <div class="product-card__image-wrap">
+          <span class="badge badge--new">New</span>
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/product-cat-vase.jpg" alt="Cat Vase Sculpture">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Cat Vase Sculpture</p>
+            <p class="product-card__price">USD 34.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="product-card" data-category="lamp" data-name="Wooden Table Lamp">
+        <div class="product-card__image-wrap">
+          <span class="badge badge--hot">Hot</span>
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/Pozharsky - Etsy.jpeg" alt="Wooden Table Lamp">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Wooden Table Lamp</p>
+            <p class="product-card__price">USD 89.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="product-card" data-category="kitchen" data-name="Utensil Holder">
+        <div class="product-card__image-wrap">
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/product-utensil-holder.jpg" alt="Utensil Holder">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Utensil Holder</p>
+            <p class="product-card__price">USD 24.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="product-card" data-category="decor" data-name="Twist Organizer">
+        <div class="product-card__image-wrap">
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/product-twist-organizer.jpg" alt="Twist Organizer">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Twist Organizer</p>
+            <p class="product-card__price">USD 39.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="product-card" data-category="kitchen" data-name="Soap Dish">
+        <div class="product-card__image-wrap">
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/product-soap-dish.jpg" alt="Soap Dish">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Soap Dish</p>
+            <p class="product-card__price">USD 18.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="product-card" data-category="decor" data-name="Cat Desk Organizer">
+        <div class="product-card__image-wrap">
+          <span class="badge badge--featured">Featured</span>
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/cat-desk-organizer.jpg" alt="Cat Desk Organizer">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Cat Desk Organizer</p>
+            <p class="product-card__price">USD 44.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="product-card" data-category="decor" data-name="Wave Tray">
+        <div class="product-card__image-wrap">
+          <span class="badge badge--featured">Featured</span>
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/cat-wave-tray.jpg" alt="Wave Tray">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Wave Tray</p>
+            <p class="product-card__price">USD 29.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="product-card" data-category="organizer" data-name="Multi Stand">
+        <div class="product-card__image-wrap">
+          <span class="badge badge--featured">Featured</span>
+          <div class="card-rating">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            5.0
+          </div>
+          <img src="images/cat-multi-stand.webp" alt="Multi Stand">
+        </div>
+        <div class="product-card__footer">
+          <div class="product-card__info">
+            <p class="product-card__name">Multi Stand</p>
+            <p class="product-card__price">USD 54.99</p>
+          </div>
+          <button class="card-link-btn" aria-label="View product">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+  </main>
+
+  <script>
+    // ── FILTER ──
+    function filterProducts(btn, category) {
+      // Update active pill
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide cards
+      const cards = document.querySelectorAll('.product-card');
+      cards.forEach(card => {
+        const match = category === 'all' || card.dataset.category === category;
+        card.style.display = match ? '' : 'none';
+      });
+    }
+
+    // ── SEARCH ──
+    function searchProducts() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      document.querySelectorAll('.product-card').forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        card.style.display = name.includes(q) ? '' : 'none';
+      });
+    }
+
+    // ── PAGINATION (stub — scrolls grid) ──
+    let page = 0;
+    function nextPage() {
+      document.getElementById('productGrid').scrollBy({ top: 200, behavior: 'smooth' });
+    }
+    function prevPage() {
+      document.getElementById('productGrid').scrollBy({ top: -200, behavior: 'smooth' });
+    }
+
+    // ── GO TO PRODUCT DETAIL ──
+    function goToProduct(id) {
+      window.location.href = 'single-product.html?id=' + id;
+    }
+
+    // Wire up all card link buttons using each card's data-id
+    document.querySelectorAll('.product-card').forEach((card, i) => {
+      const id = card.dataset.id || (i + 1);
+      card.querySelector('.card-link-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToProduct(id);
+      });
+      card.addEventListener('click', () => goToProduct(id));
+    });
+  </script>
+
+</body>
+</html>

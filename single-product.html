@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — CraftWave</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ── TOKENS ── */
+    :root {
+      --color-accent:      #1A1A1A;
+      --color-bg:          #FFFFFF;
+      --color-bg-soft:     #F5F5F5;
+      --color-text:        #1A1A1A;
+      --color-muted:       #888888;
+      --color-border:      #EBEBEB;
+      --badge-new:         #22C55E;
+      --badge-hot:         #EF4444;
+      --font-base:         'Inter', system-ui, sans-serif;
+      --font-desc:         'DM Sans', system-ui, sans-serif;
+      --radius-card:       20px;
+      --radius-pill:       100px;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-base);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── PRIMARY NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 32px;
+    }
+    .nav__logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--color-text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav__links {
+      display: flex;
+      gap: 32px;
+    }
+    .nav__links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav__links a:hover,
+    .nav__links a.active { color: var(--color-text); }
+    .nav__icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav__icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text);
+      background: none;
+      transition: background 0.15s;
+    }
+    .nav__icon-btn:hover { background: var(--color-border); }
+
+    /* ── MAIN WRAPPER ── */
+    .main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 36px;
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+    .breadcrumb a {
+      color: var(--color-muted);
+      transition: color 0.15s;
+    }
+    .breadcrumb a:hover { color: var(--color-text); }
+    .breadcrumb__sep {
+      font-size: 11px;
+      color: var(--color-border);
+    }
+    .breadcrumb__current { color: var(--color-text); font-weight: 500; }
+
+    /* ── PRODUCT LAYOUT ── */
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ── IMAGE PANEL ── */
+    .product-images {}
+    .product-images__main {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+    .product-images__main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .product-images__main:hover img {
+      transform: scale(1.04);
+    }
+    .product-images__badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.2px;
+    }
+    .badge--new  { background: var(--badge-new); }
+    .badge--hot  { background: var(--badge-hot); }
+    .badge--featured {
+      background: rgba(0,0,0,0.08);
+      color: var(--color-text);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Thumbnails */
+    .product-images__thumbs {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.18s;
+      flex-shrink: 0;
+      background: var(--color-bg-soft);
+    }
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumb.active,
+    .thumb:hover { border-color: var(--color-text); }
+
+    /* ── INFO PANEL ── */
+    .product-info {
+      padding-top: 8px;
+    }
+
+    /* Category chip */
+    .product-info__cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 14px;
+    }
+    .product-info__cat-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-muted);
+    }
+
+    /* Name */
+    .product-info__name {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: 16px;
+      font-family: var(--font-desc);
+    }
+
+    /* Rating */
+    .product-info__rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .stars {
+      display: flex;
+      gap: 2px;
+    }
+    .stars svg { color: #F59E0B; }
+    .product-info__rating-score {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .product-info__rating-count {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    /* Price */
+    .product-info__price {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--color-text);
+      margin-bottom: 24px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 24px 0;
+    }
+
+    /* Description */
+    .product-info__desc {
+      font-family: var(--font-desc);
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--color-muted);
+      margin-bottom: 28px;
+    }
+
+    /* Specs */
+    .product-info__specs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .spec-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .spec-row svg { color: var(--color-text); flex-shrink: 0; }
+    .spec-row span { color: var(--color-muted); }
+
+    /* Quantity */
+    .product-info__qty-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--color-text);
+      margin-bottom: 10px;
+    }
+    .qty-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-pill);
+      padding: 4px;
+      margin-bottom: 20px;
+    }
+    .qty-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .qty-btn:hover { background: var(--color-border); }
+    .qty-value {
+      width: 36px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* CTA buttons */
+    .product-info__actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .btn-cart {
+      flex: 1;
+      height: 50px;
+      border-radius: var(--radius-pill);
+      background: var(--color-text);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.18s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-cart:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-cart:active { transform: translateY(0); }
+    .btn-wish {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-border);
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text);
+      transition: background 0.18s, border-color 0.18s;
+      flex-shrink: 0;
+    }
+    .btn-wish:hover {
+      background: var(--color-bg-soft);
+      border-color: var(--color-text);
+    }
+    .btn-wish.active {
+      background: #FEF2F2;
+      border-color: #EF4444;
+      color: #EF4444;
+    }
+
+    /* Delivery tag */
+    .delivery-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--color-muted);
+      padding: 12px 16px;
+      background: var(--color-bg-soft);
+      border-radius: 12px;
+    }
+    .delivery-tag svg { color: #22C55E; flex-shrink: 0; }
+
+    /* ── RELATED SECTION ── */
+    .related {
+      margin-top: 80px;
+    }
+    .related__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .related__title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+    .related__link {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.15s;
+    }
+    .related__link:hover { color: var(--color-text); }
+    .related__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* Mini product card */
+    .mini-card {
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .mini-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+    }
+    .mini-card__img {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+    .mini-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .mini-card:hover .mini-card__img img { transform: scale(1.05); }
+    .mini-card__footer {
+      padding: 12px 16px 16px;
+    }
+    .mini-card__name {
+      font-family: var(--font-desc);
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 2px;
+    }
+    .mini-card__price {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* ── FADE IN ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .product-images { animation: fadeUp 0.45s ease both 0.05s; }
+    .product-info   { animation: fadeUp 0.45s ease both 0.15s; }
+    .mini-card:nth-child(1) { animation: fadeUp 0.4s ease both 0.05s; }
+    .mini-card:nth-child(2) { animation: fadeUp 0.4s ease both 0.12s; }
+    .mini-card:nth-child(3) { animation: fadeUp 0.4s ease both 0.19s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .product-detail { grid-template-columns: 1fr; gap: 32px; }
+      .related__grid { grid-template-columns: repeat(2, 1fr); }
+      .product-info__name { font-size: 26px; }
+    }
+    @media (max-width: 600px) {
+      .main { padding: 24px 16px 60px; }
+      .related__grid { grid-template-columns: 1fr; gap: 12px; }
+      .product-detail { gap: 24px; }
+    }
+
+    /* ── ADD TO CART SUCCESS ── */
+    .cart-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--color-text);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 999;
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .cart-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        Craft<img src="images/wave.png" style="height:14px;display:inline-block;margin-left:2px;" alt="">
+      </a>
+      <nav class="nav__links">
+        <a href="product.html">All Products</a>
+        <a href="#">About Us</a>
+        <a href="#">FAQ</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="nav__icons">
+        <button class="nav__icon-btn" aria-label="Wishlist">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="nav__icon-btn" aria-label="Cart">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </button>
+        <button class="nav__icon-btn" aria-label="Profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb__sep">›</span>
+      <a href="product.html">All Products</a>
+      <span class="breadcrumb__sep">›</span>
+      <span class="breadcrumb__current" id="breadcrumb-name">Product</span>
+    </nav>
+
+    <!-- Product Detail -->
+    <div class="product-detail">
+
+      <!-- Image Panel -->
+      <div class="product-images">
+        <div class="product-images__main">
+          <span class="product-images__badge" id="product-badge" style="display:none"></span>
+          <img id="main-image" src="" alt="">
+        </div>
+        <div class="product-images__thumbs" id="thumbs-row"></div>
+      </div>
+
+      <!-- Info Panel -->
+      <div class="product-info">
+        <div class="product-info__cat">
+          <span class="product-info__cat-dot"></span>
+          <span id="product-category">Category</span>
+        </div>
+
+        <h1 class="product-info__name" id="product-name">Product Name</h1>
+
+        <div class="product-info__rating">
+          <div class="stars" id="stars-container"></div>
+          <span class="product-info__rating-score" id="rating-score">5.0</span>
+          <span class="product-info__rating-count">(128 reviews)</span>
+        </div>
+
+        <div class="product-info__price" id="product-price">USD 0.00</div>
+
+        <div class="divider"></div>
+
+        <p class="product-info__desc" id="product-desc">Loading description...</p>
+
+        <div class="product-info__specs" id="product-specs"></div>
+
+        <div class="divider"></div>
+
+        <div class="product-info__qty-label">Quantity</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease">−</button>
+          <span class="qty-value" id="qty-display">1</span>
+          <button class="qty-btn" onclick="changeQty(1)" aria-label="Increase">+</button>
+        </div>
+
+        <div class="product-info__actions">
+          <button class="btn-cart" onclick="addToCart()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Add to Cart
+          </button>
+          <button class="btn-wish" id="wish-btn" onclick="toggleWish()" aria-label="Wishlist">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+
+        <div class="delivery-tag">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span>Free shipping on orders over USD 50 — arrives in 3–5 days</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related Products -->
+    <section class="related">
+      <div class="related__header">
+        <h2 class="related__title">You May Also Like</h2>
+        <a href="product.html" class="related__link">
+          View all
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+      <div class="related__grid" id="related-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="cart-toast" id="cart-toast">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toast-msg">Added to cart</span>
+  </div>
+
+  <script>
+    // ── PRODUCT DATA ──
+    const products = [
+      {
+        id: 1, name: 'Desk Organizer Set', price: 'USD 49.99', category: 'Organizer',
+        image: 'images/hero-desk-organizer.jpg', badge: 'new', rating: 5.0,
+        desc: 'Keep your workspace clean and inspiring with this handcrafted desk organizer set. Made from sustainably sourced materials, each piece is carefully shaped to hold your everyday essentials with style. Perfect for the modern creative professional.',
+        specs: [
+          { icon: 'material', label: 'Material: Premium beech wood with matte finish' },
+          { icon: 'size', label: 'Dimensions: 28 × 12 × 10 cm' },
+          { icon: 'eco', label: 'Sustainably sourced & eco-friendly' },
+        ]
+      },
+      {
+        id: 2, name: 'Cat Vase Sculpture', price: 'USD 34.99', category: 'Decor',
+        image: 'images/product-cat-vase.jpg', badge: 'new', rating: 5.0,
+        desc: 'A sculptural vase that doubles as an art piece. Its playful cat silhouette adds a touch of personality to any shelf or table. Handcrafted from high-fired ceramic, this vase holds both dried and fresh flowers beautifully.',
+        specs: [
+          { icon: 'material', label: 'Material: High-fired ceramic, hand-glazed' },
+          { icon: 'size', label: 'Dimensions: 8 × 8 × 22 cm' },
+          { icon: 'eco', label: 'Dishwasher safe, food-grade glaze' },
+        ]
+      },
+      {
+        id: 3, name: 'Wooden Table Lamp', price: 'USD 89.99', category: 'Lamp',
+        image: 'images/Pozharsky - Etsy.jpeg', badge: 'hot', rating: 5.0,
+        desc: 'Cast a warm, inviting glow with this hand-turned wooden table lamp. The natural grain of the wood creates a one-of-a-kind pattern on every piece. Fitted with a soft fabric shade for a cozy, ambient light perfect for reading corners and bedside tables.',
+        specs: [
+          { icon: 'material', label: 'Material: Turned oak wood, linen shade' },
+          { icon: 'size', label: 'Height: 42 cm, Shade Ø 22 cm' },
+          { icon: 'eco', label: 'E27 socket, compatible with LED bulbs' },
+        ]
+      },
+      {
+        id: 4, name: 'Utensil Holder', price: 'USD 24.99', category: 'Kitchen',
+        image: 'images/product-utensil-holder.jpg', badge: null, rating: 5.0,
+        desc: 'Bring natural warmth to your kitchen countertop with this hand-crafted utensil holder. Wide enough to fit all your cooking tools, it keeps everything within reach while adding a beautiful organic touch to your cooking space.',
+        specs: [
+          { icon: 'material', label: 'Material: Acacia wood, food-safe oil finish' },
+          { icon: 'size', label: 'Dimensions: 12 × 12 × 18 cm' },
+          { icon: 'eco', label: 'Hand wash recommended' },
+        ]
+      },
+      {
+        id: 5, name: 'Twist Organizer', price: 'USD 39.99', category: 'Decor',
+        image: 'images/product-twist-organizer.jpg', badge: null, rating: 5.0,
+        desc: 'Inspired by the flowing forms found in nature, the Twist Organizer is a functional sculpture for your desk. Its spiraling design creates multiple compartments for pens, cards, and small accessories, while becoming a conversation piece in any room.',
+        specs: [
+          { icon: 'material', label: 'Material: 3D-printed PLA, matte sand finish' },
+          { icon: 'size', label: 'Dimensions: 14 × 14 × 16 cm' },
+          { icon: 'eco', label: 'Made from plant-based bioplastic' },
+        ]
+      },
+      {
+        id: 6, name: 'Soap Dish', price: 'USD 18.99', category: 'Kitchen',
+        image: 'images/product-soap-dish.jpg', badge: null, rating: 5.0,
+        desc: 'A minimalist soap dish with a quietly sculptural presence. Its raised ridges keep your soap dry and extend its life, while its smooth stone-like finish complements any bathroom aesthetic from rustic to contemporary.',
+        specs: [
+          { icon: 'material', label: 'Material: Cast concrete, sealed finish' },
+          { icon: 'size', label: 'Dimensions: 12 × 8 × 2.5 cm' },
+          { icon: 'eco', label: 'Water-resistant sealed base' },
+        ]
+      },
+      {
+        id: 7, name: 'Cat Desk Organizer', price: 'USD 44.99', category: 'Decor',
+        image: 'images/cat-desk-organizer.jpg', badge: 'featured', rating: 5.0,
+        desc: 'Your desk deserves a little personality. This charming cat-shaped desk organizer holds your pens, scissors, and small supplies in a compact, adorable form. Hand-painted details make each piece truly unique.',
+        specs: [
+          { icon: 'material', label: 'Material: Hand-painted resin' },
+          { icon: 'size', label: 'Dimensions: 10 × 8 × 15 cm' },
+          { icon: 'eco', label: 'Non-toxic, child-safe paint' },
+        ]
+      },
+      {
+        id: 8, name: 'Wave Tray', price: 'USD 29.99', category: 'Decor',
+        image: 'images/cat-wave-tray.jpg', badge: 'featured', rating: 5.0,
+        desc: 'The Wave Tray brings fluid, organic forms to your entryway, nightstand, or coffee table. Its gentle undulating edge catches the light beautifully and keeps your everyday essentials — keys, rings, remotes — in one elegant place.',
+        specs: [
+          { icon: 'material', label: 'Material: Hand-cast marble resin' },
+          { icon: 'size', label: 'Dimensions: 22 × 16 × 3 cm' },
+          { icon: 'eco', label: 'Scratch-resistant base coating' },
+        ]
+      },
+      {
+        id: 9, name: 'Multi Stand', price: 'USD 54.99', category: 'Organizer',
+        image: 'images/cat-multi-stand.webp', badge: 'featured', rating: 5.0,
+        desc: 'A versatile multi-level stand designed to make the most of vertical space on your desk. Holds plants, books, small decor items, and office essentials on its staggered platforms, creating a curated display that keeps everything accessible.',
+        specs: [
+          { icon: 'material', label: 'Material: Powder-coated steel, walnut shelf' },
+          { icon: 'size', label: 'Dimensions: 30 × 15 × 35 cm' },
+          { icon: 'eco', label: 'Anti-rust coating, holds up to 5 kg' },
+        ]
+      },
+    ];
+
+    // ── QUANTITY ──
+    let qty = 1;
+    function changeQty(delta) {
+      qty = Math.max(1, qty + delta);
+      document.getElementById('qty-display').textContent = qty;
+    }
+
+    // ── WISHLIST ──
+    let wished = false;
+    function toggleWish() {
+      wished = !wished;
+      const btn = document.getElementById('wish-btn');
+      btn.classList.toggle('active', wished);
+      const svg = btn.querySelector('svg');
+      svg.setAttribute('fill', wished ? 'currentColor' : 'none');
+      showToast(wished ? 'Added to wishlist' : 'Removed from wishlist');
+    }
+
+    // ── CART TOAST ──
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('cart-toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+    function addToCart() {
+      const name = document.getElementById('product-name').textContent;
+      showToast(`${name} × ${qty} added to cart`);
+    }
+
+    // ── RENDER STARS ──
+    function renderStars(rating) {
+      const full = Math.floor(rating);
+      let html = '';
+      for (let i = 0; i < 5; i++) {
+        html += `<svg width="13" height="13" viewBox="0 0 24 24" fill="${i < full ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+      }
+      return html;
+    }
+
+    // ── SPEC ICON ──
+    function specIcon(type) {
+      const icons = {
+        material: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`,
+        size:     `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`,
+        eco:      `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+      };
+      return icons[type] || icons.eco;
+    }
+
+    // ── LOAD PRODUCT ──
+    function loadProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id')) || 1;
+      const p = products.find(x => x.id === id) || products[0];
+
+      // Meta title
+      document.title = `${p.name} — CraftWave`;
+
+      // Breadcrumb
+      document.getElementById('breadcrumb-name').textContent = p.name;
+
+      // Image
+      document.getElementById('main-image').src = p.image;
+      document.getElementById('main-image').alt = p.name;
+
+      // Badge
+      const badge = document.getElementById('product-badge');
+      if (p.badge) {
+        badge.textContent = p.badge.charAt(0).toUpperCase() + p.badge.slice(1);
+        badge.className = `product-images__badge badge--${p.badge}`;
+        badge.style.display = '';
+      }
+
+      // Thumbs (show same image 3 times as placeholders)
+      const thumbsRow = document.getElementById('thumbs-row');
+      for (let i = 0; i < 3; i++) {
+        const thumb = document.createElement('div');
+        thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+        thumb.innerHTML = `<img src="${p.image}" alt="${p.name}">`;
+        thumb.addEventListener('click', () => {
+          document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+        });
+        thumbsRow.appendChild(thumb);
+      }
+
+      // Info
+      document.getElementById('product-category').textContent = p.category;
+      document.getElementById('product-name').textContent = p.name;
+      document.getElementById('product-price').textContent = p.price;
+      document.getElementById('product-desc').textContent = p.desc;
+      document.getElementById('rating-score').textContent = p.rating.toFixed(1);
+      document.getElementById('stars-container').innerHTML = renderStars(p.rating);
+
+      // Specs
+      const specsEl = document.getElementById('product-specs');
+      p.specs.forEach(s => {
+        const row = document.createElement('div');
+        row.className = 'spec-row';
+        row.innerHTML = `${specIcon(s.icon)}<span>${s.label}</span>`;
+        specsEl.appendChild(row);
+      });
+
+      // Related products (3 others)
+      const related = products.filter(x => x.id !== p.id).slice(0, 3);
+      const grid = document.getElementById('related-grid');
+      related.forEach(r => {
+        const card = document.createElement('a');
+        card.href = `single-product.html?id=${r.id}`;
+        card.className = 'mini-card';
+        card.innerHTML = `
+          <div class="mini-card__img"><img src="${r.image}" alt="${r.name}" loading="lazy"></div>
+          <div class="mini-card__footer">
+            <p class="mini-card__name">${r.name}</p>
+            <p class="mini-card__price">${r.price}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    loadProduct();
+  </script>
+
+</body>
+</html>

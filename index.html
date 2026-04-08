@@ -443,7 +443,7 @@
 
     .cat-featured__title {
       font-size: 22px;
-      font-weight: 700;
+      font-weight: 500;
       color: var(--color-text);
       margin-bottom: 6px;
     }
@@ -485,7 +485,7 @@
     .cat-wide__text { flex: 1; }
     .cat-wide__title {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 500;
       color: var(--color-text);
       margin-bottom: 6px;
     }
@@ -558,7 +558,7 @@
     }
     .cat-small__title {
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 500;
       color: var(--color-text);
       margin-bottom: 4px;
     }
@@ -697,13 +697,14 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
-    .article-card { display: flex; flex-direction: column; }
+    .article-card { display: flex; flex-direction: column; gap: 8px; text-decoration: none; cursor: pointer; }
     .article-card__img {
       width: 100%;
       aspect-ratio: 3 / 4;
       background: #E8E8E8;
-      border-radius: 10px;
+      border-radius: 16px;
       overflow: hidden;
+      flex-shrink: 0;
     }
     .article-card__img img {
       width: 100%;
@@ -715,23 +716,23 @@
     .article-card:hover .article-card__img img {
       transform: scale(1.04);
     }
-    .article-card__tag { margin-top: 10px; }
+    .article-card__info {
+      background: #F0F0F0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background 0.2s;
+    }
+    .article-card:hover .article-card__info { background: #E8E8E8; }
     .article-card__title {
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 500;
       line-height: 1.4;
-      margin-top: 6px;
       color: var(--color-text);
     }
-    .article-card__link {
-      font-size: 12px;
-      color: var(--color-muted);
-      margin-top: 8px;
-      display: inline-block;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .article-card__link:hover { color: var(--color-text); }
 
     /* Light arrow button (used by products) */
     .btn-arrow-light {
@@ -812,16 +813,31 @@
 
     /* ── NEWSLETTER ── */
     .newsletter {
+      padding: 40px 24px;
+    }
+    .newsletter__card {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
       background: #141414;
       padding: 80px 0;
-      position: relative;
-      overflow: hidden;
     }
-    .newsletter__bg {
+    .newsletter__bg-video {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      filter: blur(6px);
+      transform: scale(1.08);
+      pointer-events: none;
+    }
+    .newsletter__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgb(10 10 10 / 11%);
       pointer-events: none;
     }
     .newsletter__inner {
@@ -833,7 +849,7 @@
     }
     .newsletter__heading {
       font-size: 28px;
-      font-weight: 700;
+      font-weight: 500;
       color: #ffffff;
     }
     .newsletter__subtext {
@@ -878,10 +894,46 @@
     }
 
     /* ── FOOTER ── */
-    /* ── FOOTER ── */
     .footer {
       background: var(--color-footer-bg);
       color: var(--color-muted);
+    }
+
+    /* Trust strip */
+    .footer__trust {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid #222;
+    }
+    .footer__trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 28px 24px;
+      border-right: 1px solid #222;
+    }
+    .footer__trust-item:last-child { border-right: none; }
+    .footer__trust-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #888;
+    }
+    .footer__trust-text {}
+    .footer__trust-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #ccc;
+      margin-bottom: 2px;
+    }
+    .footer__trust-sub {
+      font-size: 11px;
+      color: #555;
     }
 
     .footer__top {
@@ -890,6 +942,55 @@
       gap: 48px;
       padding: 72px 0 56px;
       border-bottom: 1px solid #2A2A2A;
+    }
+
+    /* App download */
+    .footer__app {
+      margin-top: 20px;
+    }
+    .footer__app-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .footer__app-btns {
+      display: flex;
+      gap: 8px;
+    }
+    .footer__app-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #222;
+      border: 1px solid #2e2e2e;
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: #aaa;
+      font-size: 11px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .footer__app-btn:hover { background: #2a2a2a; color: #fff; }
+
+    /* Payments */
+    .footer__payments {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer__pay-chip {
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #555;
+      letter-spacing: 0.3px;
     }
 
     .footer__brand {
@@ -1086,7 +1187,7 @@
     <div class="nav__inner">
       <a href="#" class="nav__logo">Craft<img src="images/wave.png" style="height: 14px;display: inline-block;margin-left: 2px;" alt="CraftWave Logo" class="nav__logo-img"></a>
       <nav class="nav__links" aria-label="Main navigation">
-        <a href="#">All Product</a>
+        <a href="product.html">All Product</a>
         <a href="#">About Us</a>
         <a href="#">FAQ</a>
         <a href="#">Blog</a>
@@ -1144,8 +1245,8 @@
     </div>
 
     <!-- Right column: full-bleed image card -->
-    <div class="hero__headphones-card" style="background-image: url('images/08156a066426a2b488b7612aaad99549.jpg');">
-      <img src="images/08156a066426a2b488b7612aaad99549.jpg" alt="Compact smart camera device with screen, dial and colorful buttons">
+    <div class="hero__headphones-card" style="background-image: url('images//bfriends-by-pearson-lloyd-batch-works-for-bene_dezeen_2364_col_13-1704x2556 (1).jpg');">
+      <img src="/images/bfriends-by-pearson-lloyd-batch-works-for-bene_dezeen_2364_col_13-1704x2556 (1).jpg" alt="Compact smart camera device with screen, dial and colorful buttons">
       <div class="featured-badge">Featured</div>
       <div class="headphones-footer">
         <div>
@@ -1182,8 +1283,8 @@
         <div class="cat-featured__cta">
           <button class="btn-pill">Browse All Products</button>
           <button class="btn-arrow" aria-label="Browse all">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
             </svg>
           </button>
         </div>
@@ -1267,8 +1368,8 @@
         <div class="products__cta">
           <button class="btn-pill">View All Products</button>
           <button class="btn-arrow" aria-label="View all products">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
             </svg>
           </button>
         </div>
@@ -1278,7 +1379,7 @@
     <!-- 4-column grid -->
     <div class="products__grid">
 
-      <a href="#" class="product-card">
+      <a href="product.html" class="product-card">
         <div class="product-card__img-wrap">
           <img src="images/product-utensil-holder.jpg" alt="Utensil Holder Set">
         </div>
@@ -1287,15 +1388,15 @@
             <p class="product-card__name">Utensil Holder Set</p>
             <p class="product-card__price">₹32.00</p>
           </div>
-          <button class="btn-arrow-light" aria-label="View product">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          <span class="btn-arrow-light" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
             </svg>
-          </button>
+          </span>
         </div>
       </a>
 
-      <a href="#" class="product-card">
+      <a href="product.html" class="product-card">
         <div class="product-card__img-wrap">
           <img src="images/product-soap-dish.jpg" alt="Wave Soap Dish">
         </div>
@@ -1304,15 +1405,15 @@
             <p class="product-card__name">Wave Soap Dish</p>
             <p class="product-card__price">₹18.00</p>
           </div>
-          <button class="btn-arrow-light" aria-label="View product">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          <span class="btn-arrow-light" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
             </svg>
-          </button>
+          </span>
         </div>
       </a>
 
-      <a href="#" class="product-card">
+      <a href="product.html" class="product-card">
         <div class="product-card__img-wrap">
           <img src="images/product-cat-vase.jpg" alt="Cat Planter Vase">
         </div>
@@ -1321,15 +1422,15 @@
             <p class="product-card__name">Cat Planter Vase</p>
             <p class="product-card__price">₹28.00</p>
           </div>
-          <button class="btn-arrow-light" aria-label="View product">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          <span class="btn-arrow-light" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
             </svg>
-          </button>
+          </span>
         </div>
       </a>
 
-      <a href="#" class="product-card">
+      <a href="product.html" class="product-card">
         <div class="product-card__img-wrap">
           <img src="images/product-twist-organizer.jpg" alt="Twist Organizer">
         </div>
@@ -1338,11 +1439,11 @@
             <p class="product-card__name">Twist Organizer</p>
             <p class="product-card__price">₹22.00</p>
           </div>
-          <button class="btn-arrow-light" aria-label="View product">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          <span class="btn-arrow-light" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
             </svg>
-          </button>
+          </span>
         </div>
       </a>
 
@@ -1364,27 +1465,42 @@
         <div class="article-card__img">
           <img src="images/IMG_5385.JPG.jpeg" alt="From sketch to prototype — our design process">
         </div>
-        <span class="tag article-card__tag">Design</span>
-        <h3 class="article-card__title">From sketch to prototype — our design process</h3>
-        <a href="#" class="article-card__link">Read more →</a>
+        <div class="article-card__info">
+          <h3 class="article-card__title">From sketch to prototype — our design process</h3>
+          <button class="btn-arrow-light" aria-label="Read article">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
+            </svg>
+          </button>
+        </div>
       </article>
 
       <article class="article-card">
         <div class="article-card__img">
           <img src="images/IMG_5386.JPG.jpeg" alt="Inside the lab: how we build & test">
         </div>
-        <span class="tag article-card__tag">Process</span>
-        <h3 class="article-card__title">Inside the lab: how we build &amp; test</h3>
-        <a href="#" class="article-card__link">Read more →</a>
+        <div class="article-card__info">
+          <h3 class="article-card__title">Inside the lab: how we build &amp; test</h3>
+          <button class="btn-arrow-light" aria-label="Read article">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
+            </svg>
+          </button>
+        </div>
       </article>
 
       <article class="article-card">
         <div class="article-card__img">
           <img src="images/44ad359dfe5b1fc47e122bc32295f881.jpg" alt="Cultural Fusion — designing across traditions">
         </div>
-        <span class="tag article-card__tag">Culture</span>
-        <h3 class="article-card__title">Cultural Fusion — designing across traditions</h3>
-        <a href="#" class="article-card__link">Read more →</a>
+        <div class="article-card__info">
+          <h3 class="article-card__title">Cultural Fusion — designing across traditions</h3>
+          <button class="btn-arrow-light" aria-label="Read article">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18.36" y1="5.64" x2="5" y2="19"/><polyline points="9 5 19 5 19 14.9"/>
+            </svg>
+          </button>
+        </div>
       </article>
 
     </div>
@@ -1433,48 +1549,11 @@
 
 <!-- ── NEWSLETTER ── -->
 <section class="newsletter">
-  <svg class="newsletter__bg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <filter id="topo-distort" x="-20%" y="-20%" width="140%" height="140%">
-        <feTurbulence type="turbulence" baseFrequency="0.008 0.012" numOctaves="3" seed="8" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="85" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </defs>
-    <g filter="url(#topo-distort)" stroke="#282828" fill="none" stroke-width="1">
-      <line x1="-200" y1="-80" x2="1640" y2="-80"/>
-      <line x1="-200" y1="-62" x2="1640" y2="-62"/>
-      <line x1="-200" y1="-44" x2="1640" y2="-44"/>
-      <line x1="-200" y1="-26" x2="1640" y2="-26"/>
-      <line x1="-200" y1="-8"  x2="1640" y2="-8"/>
-      <line x1="-200" y1="10"  x2="1640" y2="10"/>
-      <line x1="-200" y1="28"  x2="1640" y2="28"/>
-      <line x1="-200" y1="46"  x2="1640" y2="46"/>
-      <line x1="-200" y1="64"  x2="1640" y2="64"/>
-      <line x1="-200" y1="82"  x2="1640" y2="82"/>
-      <line x1="-200" y1="100" x2="1640" y2="100"/>
-      <line x1="-200" y1="118" x2="1640" y2="118"/>
-      <line x1="-200" y1="136" x2="1640" y2="136"/>
-      <line x1="-200" y1="154" x2="1640" y2="154"/>
-      <line x1="-200" y1="172" x2="1640" y2="172"/>
-      <line x1="-200" y1="190" x2="1640" y2="190"/>
-      <line x1="-200" y1="208" x2="1640" y2="208"/>
-      <line x1="-200" y1="226" x2="1640" y2="226"/>
-      <line x1="-200" y1="244" x2="1640" y2="244"/>
-      <line x1="-200" y1="262" x2="1640" y2="262"/>
-      <line x1="-200" y1="280" x2="1640" y2="280"/>
-      <line x1="-200" y1="298" x2="1640" y2="298"/>
-      <line x1="-200" y1="316" x2="1640" y2="316"/>
-      <line x1="-200" y1="334" x2="1640" y2="334"/>
-      <line x1="-200" y1="352" x2="1640" y2="352"/>
-      <line x1="-200" y1="370" x2="1640" y2="370"/>
-      <line x1="-200" y1="388" x2="1640" y2="388"/>
-      <line x1="-200" y1="406" x2="1640" y2="406"/>
-      <line x1="-200" y1="424" x2="1640" y2="424"/>
-      <line x1="-200" y1="442" x2="1640" y2="442"/>
-      <line x1="-200" y1="460" x2="1640" y2="460"/>
-      <line x1="-200" y1="478" x2="1640" y2="478"/>
-    </g>
-  </svg>
+  <div class="newsletter__card">
+    <video class="newsletter__bg-video" id="newsletterVideo" muted loop playsinline preload="none" aria-hidden="true">
+      <source src="images/12966793_1920_1080_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="newsletter__overlay" aria-hidden="true"></div>
   <div class="container">
     <div class="newsletter__inner">
       <h2 class="newsletter__heading">Subscribe &amp; get 15% off</h2>
@@ -1495,11 +1574,53 @@
       </div>
     </div>
   </div>
+  </div>
 </section>
 
 <!-- ── FOOTER ── -->
 <footer class="footer">
   <div class="container">
+
+    <!-- ── TRUST STRIP ── -->
+    <div class="footer__trust">
+      <div class="footer__trust-item">
+        <div class="footer__trust-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="footer__trust-text">
+          <p class="footer__trust-title">Free Shipping</p>
+          <p class="footer__trust-sub">On all orders over ₹999</p>
+        </div>
+      </div>
+      <div class="footer__trust-item">
+        <div class="footer__trust-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="footer__trust-text">
+          <p class="footer__trust-title">Secure Checkout</p>
+          <p class="footer__trust-sub">256-bit SSL encryption</p>
+        </div>
+      </div>
+      <div class="footer__trust-item">
+        <div class="footer__trust-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 11 8 11"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+        </div>
+        <div class="footer__trust-text">
+          <p class="footer__trust-title">30-Day Returns</p>
+          <p class="footer__trust-sub">Hassle-free, no questions asked</p>
+        </div>
+      </div>
+      <div class="footer__trust-item">
+        <div class="footer__trust-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <div class="footer__trust-text">
+          <p class="footer__trust-title">24/7 Support</p>
+          <p class="footer__trust-sub">Real humans, fast replies</p>
+        </div>
+      </div>
+    </div>
+
     <div class="footer__top">
 
       <!-- Brand column -->
@@ -1521,40 +1642,63 @@
           </a>
         </div>
         <div class="footer__contact">
-          <p>hello@etec.store</p>
-          <p>San Francisco, CA 94105</p>
+          <p>hello@craftwave.store</p>
+          <p>+91 98765 43210</p>
+          <p>Mumbai, Maharashtra 400001</p>
+        </div>
+        <div class="footer__app">
+          <p class="footer__app-label">Get the app</p>
+          <div class="footer__app-btns">
+            <a href="#" class="footer__app-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              App Store
+            </a>
+            <a href="#" class="footer__app-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.6-12.6L13.41 8l-10.23 15.76zM20.46 10.7l-2.84-1.64-3.56 3.56 3.56 3.56 2.87-1.66c.82-.47.82-1.36.0-1.82zM2.01 1.05C1.86 1.3 1.8 1.6 1.8 1.94v20.12c0 .34.06.64.21.9L13.41 11.35 2.01 1.05zM16.77 3.54l-12.6-1.3c-.35-.05-.69.02-.99.19L14.62 9.78l2.15-6.24z"/></svg>
+              Play Store
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Shop -->
       <div class="footer__col">
         <span class="footer__col-heading">Shop</span>
-        <a href="#">All Products</a>
+        <a href="product.html">All Products</a>
         <a href="#">Desk Organizers</a>
         <a href="#">Calendars</a>
         <a href="#">Wall Shelves</a>
         <a href="#">Trays &amp; Dishes</a>
-        <a href="#">New In</a>
+        <a href="#">Lamps &amp; Lighting</a>
+        <a href="#">New Arrivals</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">Gift Cards</a>
       </div>
 
       <!-- Company -->
       <div class="footer__col">
         <span class="footer__col-heading">Company</span>
         <a href="#">About Us</a>
+        <a href="#">Our Story</a>
         <a href="#">Blog</a>
         <a href="#">Careers</a>
-        <a href="#">Press</a>
+        <a href="#">Press &amp; Media</a>
         <a href="#">Sustainability</a>
+        <a href="#">Affiliates</a>
+        <a href="#">Wholesale</a>
       </div>
 
       <!-- Support -->
       <div class="footer__col">
         <span class="footer__col-heading">Support</span>
+        <a href="#">Help Centre</a>
         <a href="#">FAQ</a>
         <a href="#">Shipping Info</a>
         <a href="#">Returns &amp; Refunds</a>
-        <a href="#">Track Order</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Size Guide</a>
         <a href="#">Contact Us</a>
+        <a href="#">Live Chat</a>
       </div>
 
       <!-- Legal -->
@@ -1564,23 +1708,55 @@
         <a href="#">Terms of Service</a>
         <a href="#">Cookie Policy</a>
         <a href="#">Accessibility</a>
+        <a href="#">GDPR</a>
+        <a href="#">Refund Policy</a>
       </div>
 
     </div>
 
     <!-- Bottom bar -->
     <div class="footer__bottom">
-      <span class="footer__copy">© 2026 etec · All rights reserved</span>
+      <span class="footer__copy">© 2026 CraftWave · All rights reserved</span>
+      <div class="footer__payments">
+        <span class="footer__pay-chip">VISA</span>
+        <span class="footer__pay-chip">Mastercard</span>
+        <span class="footer__pay-chip">UPI</span>
+        <span class="footer__pay-chip">PayPal</span>
+        <span class="footer__pay-chip">Apple Pay</span>
+        <span class="footer__pay-chip">GPay</span>
+      </div>
       <div class="footer__bottom-links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
         <a href="#">Sitemap</a>
       </div>
-      <span class="footer__badge">Designed &amp; 3D printed with care</span>
     </div>
   </div>
 </footer>
 
+  <script>
+    // ── VIDEO AUTOPLAY ON APPROACH ──
+    (function() {
+      const video = document.getElementById('newsletterVideo');
+      if (!video) return;
+      // Start loading & playing when section is 200px away from viewport
+      var started = false;
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            if (!started) {
+              video.currentTime = 15;
+              started = true;
+            }
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      }, { rootMargin: '200px 0px', threshold: 0 });
+      observer.observe(document.querySelector('.newsletter__card'));
+    })();
+  </script>
   <script>
     (function() {
   const form   = document.getElementById('newsletter-form');
